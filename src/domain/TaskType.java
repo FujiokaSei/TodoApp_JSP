@@ -6,6 +6,7 @@ public class TaskType {
 
 	//コンストラクタを定義
 	public TaskType() {}
+
 	public TaskType(Integer id, String name) {
 		this.id = id;
 		this.name = name;
@@ -26,6 +27,5 @@ public class TaskType {
 	public void setName(String name) {
 		this.name = name;
 	}
-
 
 }
