@@ -12,6 +12,7 @@ public class TaskType {
 		this.name = name;
 	}
 
+	//getter,setterの定義
 	public Integer getId() {
 		return id;
 	}

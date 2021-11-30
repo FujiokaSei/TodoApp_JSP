@@ -11,7 +11,7 @@ public class Tasks {
 	private Integer userId;
 	private Integer taskTypeId;
 
-	//コンストラクタ
+	//コンストラクタの定義
 	public Tasks() {}
 	public Tasks(String title, String detail, Date addingTime, Date timeLimit, Integer userId, Integer taskTypeId) {
 		this.title = title;
@@ -22,6 +22,7 @@ public class Tasks {
 		this.taskTypeId = taskTypeId;
 	}
 
+	//getter,setterの定義
 	public String getTitle() {
 		return title;
 	}
