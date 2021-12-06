@@ -2,8 +2,9 @@ package domain;
 
 import java.util.Date;
 
-public class Tasks {
+public class Task {
 
+	private Integer id;
 	private String title;
 	private String detail;
 	private Date addingTime;
@@ -12,8 +13,8 @@ public class Tasks {
 	private Integer taskTypeId;
 
 	//コンストラクタの定義
-	public Tasks() {}
-	public Tasks(String title, String detail, Date addingTime, Date timeLimit, Integer userId, Integer taskTypeId) {
+	public Task() {}
+	public Task(String title, String detail, Date addingTime, Date timeLimit, Integer userId, Integer taskTypeId) {
 		this.title = title;
 		this.detail = detail;
 		this.addingTime = addingTime;
@@ -23,6 +24,14 @@ public class Tasks {
 	}
 
 	//getter,setterの定義
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
 	public String getTitle() {
 		return title;
 	}
