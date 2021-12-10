@@ -47,13 +47,10 @@ public class TaskTypeDaoImpl implements TaskTypeDao {
 			if (rs.next()) {
 				taskType = mapToTaskType(rs);
 			}
-
 		} catch (Exception e) {
 			throw e;
 		}
-
 		return taskType;
-
 	}
 
 	@Override

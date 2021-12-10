@@ -11,7 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.DaoFactory;
 import dao.TaskDao;
+import dao.TaskTypeDao;
 import domain.Task;
+import domain.TaskType;
 
 /**
  * Servlet implementation class AddTaskServlet
@@ -27,8 +29,14 @@ public class AddTaskServlet extends HttpServlet {
 			throws ServletException, IOException {
 		try {
 			TaskDao taskDao = DaoFactory.createTaskDao();
+			TaskTypeDao taskTypeDao = DaoFactory.createTaskTypeDao();
+
 			List<Task> taskList = taskDao.findAll();
+			List<TaskType> taskTypeList = taskTypeDao.findAll();
+
 			request.setAttribute("taskList", taskList);
+			request.setAttribute("taskTypeList", taskTypeList);
+
 			request.getRequestDispatcher("WEB-INF/view/addTask.jsp")
 					.forward(request, response);
 		}
@@ -44,6 +52,24 @@ public class AddTaskServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+
+		//		try(){
+		//
+		//		}catch() {
+		//
+		//		}
+
+		String title = request.getParameter("title");
+		System.out.println("title:" + title);
+		String detail = request.getParameter("detail");
+		System.out.println("detail:" + detail);
+		Integer taskTypeId = Integer.parseInt(request.getParameter("taskTypeId"));
+		System.out.println("taskType:" + taskTypeId);
+		String timeLimitStr = request.getParameter("timeLimit");
+		System.out.println("timeLimit:" + timeLimitStr);
+
+
+
 
 		TaskDao taskDao = DaoFactory.createTaskDao();
 
