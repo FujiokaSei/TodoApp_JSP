@@ -33,17 +33,27 @@
 					<!-- 説明 textarea -->
 					<div class="form-group">
 						<label for="formDetail">説明</label>
+						<c:if test="${not empty detailError }">
+							<div class="error-message">
+								<c:out value="${detailError }" />
+							</div>
+						</c:if>
 						<textarea name="detail" id="formDetail" class="form-control"><c:out
 								value="${detail}" /></textarea>
 					</div>
 
 					<!-- 種別 type -->
 					<div class="form-group">
-						<label for="formType">種別</label> <select name="taskTypeId"
-							id="formType" class="form-control">
+						<label for="formType">種別</label>
+						<c:if test="${not empty taskTypeError}">
+							<div class="error-message">
+								<c:out value="${taskTypeError }" />
+							</div>
+						</c:if>
+						<select name="taskTypeId" id="formType" class="form-control">
 							<c:forEach items="${taskTypeList}" var="taskType">
 								<option value="<c:out value="${taskType.id}" />"
-									<c:if test="${type.id == locationId}">selected</c:if>>
+									<c:if test="${taskType.id == taskTypeId}">selected</c:if>>
 									<c:out value="${taskType.name}" />
 								</option>
 							</c:forEach>
@@ -59,7 +69,8 @@
 							</div>
 						</c:if>
 						<input type="datetime-local" name="timeLimit" id="formTimeLimit"
-							class="form-control" />
+						value="<c:out value="${now}"/>"
+							min="<c:out value="${now}"/>" class="form-control" />
 					</div>
 
 

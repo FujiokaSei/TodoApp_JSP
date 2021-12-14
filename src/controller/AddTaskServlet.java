@@ -1,7 +1,6 @@
 package controller;
 
 import java.io.IOException;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -37,6 +36,11 @@ public class AddTaskServlet extends HttpServlet {
 			List<Task> taskList = taskDao.findAll();
 			List<TaskType> taskTypeList = taskTypeDao.findAll();
 
+			SimpleDateFormat sdf = new SimpleDateFormat("y-MM-dd'T'HH:mm");
+			Date now = new Date();
+			String nowSdf = sdf.format(now);
+
+			request.setAttribute("now", nowSdf);
 			request.setAttribute("taskList", taskList);
 			request.setAttribute("taskTypeList", taskTypeList);
 
@@ -113,12 +117,12 @@ public class AddTaskServlet extends HttpServlet {
 			/*暫定対応
 			 * 期限入力に初期値を設定することで下記のParseException例外対策を不要とする。
 			 */
-			try {
-				timeLimit = sdf.parse(timeLimitStr);
-			} catch (ParseException e) {
-				request.getRequestDispatcher("WEB-INF/view/addTask.jsp")
-						.forward(request, response);
-			}
+//			try {
+//				timeLimit = sdf.parse(timeLimitStr);
+//			} catch (ParseException e) {
+//				request.getRequestDispatcher("WEB-INF/view/addTask.jsp")
+//						.forward(request, response);
+//			}
 
 			if (isError) {
 				request.getRequestDispatcher("WEB-INF/view/addTask.jsp")
