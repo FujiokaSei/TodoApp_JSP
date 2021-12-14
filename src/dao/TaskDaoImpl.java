@@ -3,6 +3,7 @@ package dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,12 +24,12 @@ public class TaskDaoImpl implements TaskDao {
 		// TODO 自動生成されたメソッド・スタブ
 		List<Task> taskList = new ArrayList<>();
 		try (Connection con = ds.getConnection()) {
-//			String sql = "SELECT * FROM task_board.tasks;";
+			//			String sql = "SELECT * FROM task_board.tasks;";
 			String sql = "SELECT * FROM tasks;";
-//			String sql = "SELECT *,locations.name AS location_name "
-//					+ "FROM tasks JOIN locations "
-//					+ "ON tasks.location_id = locations.id "
-//					+ "ORDER BY tasks.id";
+			//			String sql = "SELECT *,locations.name AS location_name "
+			//					+ "FROM tasks JOIN locations "
+			//					+ "ON tasks.location_id = locations.id "
+			//					+ "ORDER BY tasks.id";
 			PreparedStatement stmt = con.prepareStatement(sql);
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
@@ -48,7 +49,21 @@ public class TaskDaoImpl implements TaskDao {
 
 	@Override
 	public void insert(Task task) throws Exception {
-		// TODO 自動生成されたメソッド・スタブ
+		try (Connection con = ds.getConnection()) {
+			String sql = "INSERT INTO task_board.tasks"
+					+ "(title, detail, adding_time, time_limit, user_id, task_type_id)VALUES"
+					+ " (?, ?, NOW(), ?, ?, ?)";
+			PreparedStatement stmt = con.prepareStatement(sql);
+			stmt.setString(1, task.getTitle());
+			stmt.setString(2, task.getDetail());
+			stmt.setObject(3, task.getTimeLimit(), Types.DATE);
+			stmt.setObject(4, task.getUserId(), Types.INTEGER);
+			stmt.setObject(5, task.getTaskTypeId(), Types.INTEGER);
+			stmt.executeUpdate();
+
+		} catch (Exception e) {
+			throw e;
+		}
 
 	}
 
