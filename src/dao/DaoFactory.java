@@ -17,6 +17,10 @@ public class DaoFactory {
 		return new TaskTypeDaoImpl(getDataSource());
 	}
 
+	public static UserDao createUserDao() {
+		return new UserDaoImpl(getDataSource());
+	}
+
 	private static DataSource getDataSource() {
 		InitialContext ctx = null;
 		DataSource ds = null;

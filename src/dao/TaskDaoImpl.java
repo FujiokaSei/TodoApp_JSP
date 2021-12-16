@@ -25,7 +25,7 @@ public class TaskDaoImpl implements TaskDao {
 		List<Task> taskList = new ArrayList<>();
 		try (Connection con = ds.getConnection()) {
 			//			String sql = "SELECT * FROM task_board.tasks;";
-			String sql = "SELECT * FROM tasks;";
+			String sql = "SELECT * FROM task_board.tasks;";
 			//			String sql = "SELECT *,locations.name AS location_name "
 			//					+ "FROM tasks JOIN locations "
 			//					+ "ON tasks.location_id = locations.id "
@@ -75,8 +75,15 @@ public class TaskDaoImpl implements TaskDao {
 
 	@Override
 	public void delete(Task task) throws Exception {
-		// TODO 自動生成されたメソッド・スタブ
-
+		int id = task.getId();
+		try (Connection con = ds.getConnection()) {
+			String sql = "DELETE FROM tasks WHERE id=?";
+			PreparedStatement stmt = con.prepareStatement(sql);
+			stmt.setInt(1, id);
+			stmt.executeUpdate();
+		} catch (Exception e) {
+			throw e;
+		}
 	}
 
 	protected Task mapToTask(ResultSet rs) throws Exception {
