@@ -29,29 +29,34 @@ public class AddTaskServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		try {
-			TaskDao taskDao = DaoFactory.createTaskDao();
-			TaskTypeDao taskTypeDao = DaoFactory.createTaskTypeDao();
+		/*
+		 * Getされることはないので不要と思われる。
+		 * */
 
-			List<Task> taskList = taskDao.findAll();
-			List<TaskType> taskTypeList = taskTypeDao.findAll();
-
-			SimpleDateFormat sdf = new SimpleDateFormat("y-MM-dd'T'HH:mm");
-			Date now = new Date();
-			String nowSdf = sdf.format(now);
-
-			request.setAttribute("now", nowSdf);
-			request.setAttribute("taskList", taskList);
-			request.setAttribute("taskTypeList", taskTypeList);
-
-			request.getRequestDispatcher("WEB-INF/view/addTask.jsp")
-					.forward(request, response);
-		}
-
-		catch (Exception e) {
-			throw new ServletException(e);
-		}
-
+//
+//		try {
+//			TaskDao taskDao = DaoFactory.createTaskDao();
+//			TaskTypeDao taskTypeDao = DaoFactory.createTaskTypeDao();
+//
+//			List<Task> taskList = taskDao.findAll();
+//			List<TaskType> taskTypeList = taskTypeDao.findAll();
+//
+//			SimpleDateFormat sdf = new SimpleDateFormat("y-MM-dd'T'HH:mm");
+//			Date now = new Date();
+//			String nowSdf = sdf.format(now);
+//
+//			request.setAttribute("now", nowSdf);
+//			request.setAttribute("taskList", taskList);
+//			request.setAttribute("taskTypeList", taskTypeList);
+//
+//			request.getRequestDispatcher("WEB-INF/view/main.jsp")
+//					.forward(request, response);
+//		}
+//
+//		catch (Exception e) {
+//			throw new ServletException(e);
+//		}
+//
 	}
 
 	/**
@@ -59,6 +64,15 @@ public class AddTaskServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+
+		/*
+		 * ①データを受け取る
+		 *
+		 * ②データをセットする
+		 *
+		 * ③MainServletにフォワードする。
+		 *
+		 * */
 
 		try {
 			TaskDao taskDao = DaoFactory.createTaskDao();
@@ -97,35 +111,28 @@ public class AddTaskServlet extends HttpServlet {
 			//taskTypeId=10;
 			if (taskTypeId < 1 || taskTypeList.size() < taskTypeId) {
 				isError = true;
-				request.setAttribute("taskTypeError", "タスク種別が無効です");
+				request.setAttribute("taskTypeError", "※タスク種別が無効です");
 			}
 
 			//timeLimitStrのNullチェック
 			Date timeLimit = null;
+
 			if (timeLimitStr == "") {
 				isError = true;
-				request.setAttribute("timeLimitError", "期限を設定してください");
+				request.setAttribute("timeLimitError", "※期限を設定してください");
 			}
 
-			request.setAttribute("title", title);
-			request.setAttribute("detail", detail);
-			request.setAttribute("taskTypeId", taskTypeId);
-			request.setAttribute("timeLimit", timeLimitStr);
-			request.setAttribute("now", nowSdf);
-			request.setAttribute("taskTypeList", taskTypeList);
 
-			/*暫定対応
-			 * 期限入力に初期値を設定することで下記のParseException例外対策を不要とする。
-			 */
-//			try {
-//				timeLimit = sdf.parse(timeLimitStr);
-//			} catch (ParseException e) {
-//				request.getRequestDispatcher("WEB-INF/view/addTask.jsp")
-//						.forward(request, response);
-//			}
 
 			if (isError) {
-				request.getRequestDispatcher("WEB-INF/view/addTask.jsp")
+				request.setAttribute("title", title);
+				request.setAttribute("detail", detail);
+				request.setAttribute("taskTypeId", taskTypeId);
+				request.setAttribute("timeLimit", timeLimitStr);
+				request.setAttribute("now", nowSdf);
+				request.setAttribute("taskTypeList", taskTypeList);
+
+				request.getRequestDispatcher("WEB-INF/view/main.jsp")
 						.forward(request, response);
 				return;
 			}
@@ -148,6 +155,9 @@ public class AddTaskServlet extends HttpServlet {
 			System.out.println("nowSdf:" + nowSdf);
 
 			System.out.println("insertしました");
+
+			request.getRequestDispatcher("/main")
+			.forward(request, response);
 
 		} catch (Exception e) {
 			throw new ServletException(e);
