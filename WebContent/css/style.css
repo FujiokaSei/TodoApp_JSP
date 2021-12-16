@@ -1,0 +1,10 @@
+@charset "utf-8";
+
+body {
+	padding-top: 70px;
+
+}
+
+.error-message {
+    display: none;
+}
