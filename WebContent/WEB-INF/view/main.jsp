@@ -20,6 +20,9 @@
 			<div class="container-fluid">
 				<a class="navbar-brand" href="#">TodoApp</a>
 			</div>
+			<p>
+				<a href="logout" class="btn btn-danger">ログアウト</a>
+			</p>
 		</nav>
 	</header>
 
@@ -122,7 +125,8 @@
 							<!-- <h5 class="card-title">Light card title</h5> -->
 
 							<form action="/deleteTask" method="get">
-								<a href="deleteTask?id=<c:out value="${task.id}" />" class="btn btn-danger btn-sm">削除</a>
+								<a href="deleteTask?id=<c:out value="${task.id}" />"
+									class="btn btn-danger btn-sm">削除</a>
 							</form>
 							<p class="card-text"></p>
 						</div>
