@@ -7,14 +7,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <link href="css/bootstrap.min.css" rel="stylesheet" />
 <link href="css/style.css" rel="stylesheet" />
-<title>備品管理</title>
+<title>Task管理</title>
 </head>
 <body id="loginPage">
 	<div class="container">
 		<div class="row">
 			<div class="col-md-offset-3 col-md-6">
 				<div class="panel panel-default">
-					<div class="panel-heading">備品管理システム ログイン</div>
+					<div class="panel-heading">Task管理システム　ログイン</div>
 					<div class="panel-body">
 						<c:if test="${not empty error}">
 							<div class="alert alert-danger">ログインIDかパスワードが正しくありません。</div>
