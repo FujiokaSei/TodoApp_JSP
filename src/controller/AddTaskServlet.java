@@ -132,7 +132,7 @@ public class AddTaskServlet extends HttpServlet {
 				request.setAttribute("now", nowSdf);
 				request.setAttribute("taskTypeList", taskTypeList);
 
-				request.getRequestDispatcher("WEB-INF/view/main.jsp")
+				request.getRequestDispatcher("/main")
 						.forward(request, response);
 				return;
 			}

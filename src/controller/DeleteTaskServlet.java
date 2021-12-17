@@ -28,7 +28,7 @@ public class DeleteTaskServlet extends HttpServlet {
 			Task task = new Task();
 			task.setId(Integer.parseInt(strId));
 			TaskDao taskDao = DaoFactory.createTaskDao();
-			TaskDao.delete(task);
+			taskDao.delete(task);
 			request.getRequestDispatcher("/WEB-INF/view/main.jsp")
 					.forward(request, response);
 
