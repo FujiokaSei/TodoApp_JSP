@@ -100,8 +100,8 @@
 
 
 							<div class="form-group">
-								<input type="submit" class="btn btn-primary" value="追加" /> <a
-									href="listItem" class="btn btn-default">キャンセル</a>
+								<input type="submit" class="btn btn-primary" value="追加" /> <input
+									type="button" id="clear" class="btn btn-secondary" value="クリア">
 							</div>
 
 						</form>
@@ -124,6 +124,10 @@
 						<div class="card-body">
 							<!-- <h5 class="card-title">Light card title</h5> -->
 
+							<form action="/editTask" method="get">
+								<a href="editTask?id=<c:out value="${task.id}" />"
+									class="btn btn-success btn-sm">編集</a>
+							</form>
 							<form action="/deleteTask" method="get">
 								<a href="deleteTask?id=<c:out value="${task.id}" />"
 									class="btn btn-danger btn-sm">削除</a>
@@ -167,6 +171,11 @@
 
 	<script>
 		$(function() {
+			$('#clear').click(function() {
+				$('#formTitle').val("");
+				$('#formDetail').val("");
+			});
+
 		});
 	</script>
 

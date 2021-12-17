@@ -29,7 +29,7 @@ public class DeleteTaskServlet extends HttpServlet {
 			task.setId(Integer.parseInt(strId));
 			TaskDao taskDao = DaoFactory.createTaskDao();
 			taskDao.delete(task);
-			request.getRequestDispatcher("/WEB-INF/view/main.jsp")
+			request.getRequestDispatcher("/main")
 					.forward(request, response);
 
 		} catch (Exception e) {
