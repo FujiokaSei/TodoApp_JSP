@@ -45,6 +45,8 @@ public class MainServlet extends HttpServlet {
 
 			request.getRequestDispatcher("WEB-INF/view/main.jsp")
 					.forward(request, response);
+
+			System.out.println("doGet");
 		}
 
 		catch (Exception e) {
@@ -164,6 +166,7 @@ public class MainServlet extends HttpServlet {
 			//			System.out.println("nowSdf:" + nowSdf);
 			//
 			//			System.out.println("insertしました");
+			System.out.println("doPOST");
 
 		} catch (Exception e) {
 			throw new ServletException(e);

@@ -2,9 +2,24 @@
 
 body {
 	padding-top: 70px;
-
 }
 
 .error-message {
-    display: none;
+	display: none;
 }
+
+p {
+
+}
+
+#title{
+	font-size:16px;
+}
+#detail #timeLimit {
+	font-size:12.8px;
+}
+
+h1{
+	margin-bottom:30px;
+}
+

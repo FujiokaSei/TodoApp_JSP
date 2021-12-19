@@ -24,44 +24,6 @@ import domain.TaskType;
 public class AddTaskServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		/*
-		 * Getされることはないので不要と思われる。
-		 * */
-
-//
-//		try {
-//			TaskDao taskDao = DaoFactory.createTaskDao();
-//			TaskTypeDao taskTypeDao = DaoFactory.createTaskTypeDao();
-//
-//			List<Task> taskList = taskDao.findAll();
-//			List<TaskType> taskTypeList = taskTypeDao.findAll();
-//
-//			SimpleDateFormat sdf = new SimpleDateFormat("y-MM-dd'T'HH:mm");
-//			Date now = new Date();
-//			String nowSdf = sdf.format(now);
-//
-//			request.setAttribute("now", nowSdf);
-//			request.setAttribute("taskList", taskList);
-//			request.setAttribute("taskTypeList", taskTypeList);
-//
-//			request.getRequestDispatcher("WEB-INF/view/main.jsp")
-//					.forward(request, response);
-//		}
-//
-//		catch (Exception e) {
-//			throw new ServletException(e);
-//		}
-//
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -103,9 +65,9 @@ public class AddTaskServlet extends HttpServlet {
 				request.setAttribute("titleError", "※50文字以下で入力してください。");
 			}
 
-			if (detail.length() > 3000) {
+			if (detail.length() > 100) {
 				isError = true;
-				request.setAttribute("detailError", "※3000文字以下で入力してください。");
+				request.setAttribute("detailError", "※100文字以下で入力してください。");
 			}
 
 			//taskTypeId=10;
