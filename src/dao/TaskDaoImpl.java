@@ -43,8 +43,20 @@ public class TaskDaoImpl implements TaskDao {
 
 	@Override
 	public Task findById(Integer id) throws Exception {
-		// TODO 自動生成されたメソッド・スタブ
-		return null;
+		Task task = null;
+		try (Connection con = ds.getConnection()) {
+			String sql = "SELECT *  FROM task_board.tasks WHERE tasks.id=?";
+			PreparedStatement stmt = con.prepareStatement(sql);
+			stmt.setInt(1, id);
+			ResultSet rs = stmt.executeQuery();
+			if (rs.next()) {
+				task = mapToTask(rs);
+			}
+		} catch (Exception e) {
+			throw e;
+		}
+		return task;
+
 	}
 
 	@Override
