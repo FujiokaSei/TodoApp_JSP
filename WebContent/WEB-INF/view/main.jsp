@@ -124,8 +124,8 @@
 									value="<c:out value="${now}"/>" min="<c:out value="${now}"/>"
 									class="form-control" /> --%>
 									<input type="datetime-local" name="timeLimit"
-										id="formTimeLimit" min="<c:out value="${now}"/>"
-										class="form-control" />
+										value="<c:out value="${now}"/>" id="formTimeLimit"
+										min="<c:out value="${now}"/>" class="form-control" required />
 								</div>
 							</div>
 
@@ -154,7 +154,7 @@
 						<div class="card-header">
 							<div class="row">
 								<div class="col-9" id="title">
-									<c:out value="${task.title}" />
+									<b><c:out value="${task.title}" /></b>
 								</div>
 
 								<div class="col-3" style="padding-right: 0px;">
