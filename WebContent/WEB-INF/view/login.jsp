@@ -12,27 +12,21 @@
 <body id="loginPage">
 	<header>
 		<nav class="navbar navbar-dark bg-dark fixed-top">
-
 			<div class="container-fluid">
 				<div class="row justify-content-between">
 					<table>
 						<tr>
 							<td><a class="navbar-brand" href="#">TodoApp</a></td>
 						</tr>
-
 					</table>
 				</div>
-
 			</div>
-
-
-
 		</nav>
 	</header>
 
 	<div class="container">
 		<div class="row">
-			<div class="col-md-offset-3 col-md-6">
+			<div class="col-md-offset-3 col-md-6 mx-auto">
 				<div class="panel panel-default">
 					<div class="panel-heading">Task管理システム ログイン</div>
 					<div class="panel-body">
