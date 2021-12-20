@@ -21,15 +21,9 @@ public class TaskDaoImpl implements TaskDao {
 
 	@Override
 	public List<Task> findAll() throws Exception {
-		// TODO 自動生成されたメソッド・スタブ
 		List<Task> taskList = new ArrayList<>();
 		try (Connection con = ds.getConnection()) {
-			//			String sql = "SELECT * FROM task_board.tasks;";
 			String sql = "SELECT * FROM task_board.tasks;";
-			//			String sql = "SELECT *,locations.name AS location_name "
-			//					+ "FROM tasks JOIN locations "
-			//					+ "ON tasks.location_id = locations.id "
-			//					+ "ORDER BY tasks.id";
 			PreparedStatement stmt = con.prepareStatement(sql);
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
@@ -98,6 +92,39 @@ public class TaskDaoImpl implements TaskDao {
 		}
 	}
 
+	@Override
+	public List<Task> findNotDone() throws Exception {
+		List<Task> taskList = new ArrayList<>();
+		try (Connection con = ds.getConnection()) {
+			String sql = "SELECT * FROM task_board.tasks "
+					+ "WHERE(task_type_id <> 3) "
+					+ "ORDER BY time_limit ASC;";
+			PreparedStatement stmt = con.prepareStatement(sql);
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {
+				taskList.add(mapToTask(rs));
+			}
+		} catch (Exception e) {
+			throw e;
+		}
+		return taskList;
+	}
+
+	@Override
+	public void complete(Task task) throws Exception {
+		int id = task.getId();
+		try (Connection con = ds.getConnection()) {
+			String sql = "UPDATE `task_board`.`tasks` SET `task_type_id` = '3' WHERE (`id` = ?);";
+			PreparedStatement stmt = con.prepareStatement(sql);
+			stmt.setInt(1, id);
+			stmt.executeUpdate();
+
+		} catch (Exception e) {
+			throw e;
+		}
+
+	}
+
 	protected Task mapToTask(ResultSet rs) throws Exception {
 		Task task = new Task();
 		task.setId((Integer) rs.getObject("id"));
@@ -108,6 +135,24 @@ public class TaskDaoImpl implements TaskDao {
 		task.setUserId(rs.getInt("user_id"));
 		task.setTaskTypeId(rs.getInt("task_type_id"));
 		return task;
+	}
+
+	@Override
+	public Integer findDoneCount() throws Exception {
+		// TODO 自動生成されたメソッド・スタブ
+		return null;
+	}
+
+	@Override
+	public Integer findNotDoneCount() throws Exception {
+		// TODO 自動生成されたメソッド・スタブ
+		return null;
+	}
+
+	@Override
+	public Integer findAllCount() throws Exception {
+		// TODO 自動生成されたメソッド・スタブ
+		return null;
 	}
 
 }

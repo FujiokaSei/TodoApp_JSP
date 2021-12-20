@@ -32,7 +32,7 @@ public class MainServlet extends HttpServlet {
 		try {
 			TaskDao taskDao = DaoFactory.createTaskDao();
 			TaskTypeDao taskTypeDao = DaoFactory.createTaskTypeDao();
-			List<Task> taskList = taskDao.findAll();
+			List<Task> taskList = taskDao.findNotDone();
 			List<TaskType> taskTypeList = taskTypeDao.findAll();
 
 			SimpleDateFormat sdf = new SimpleDateFormat("y-MM-dd'T'HH:mm");
