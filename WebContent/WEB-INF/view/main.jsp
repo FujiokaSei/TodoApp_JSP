@@ -8,6 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <link href="css/ress.css" rel="stylesheet" />
 <link href="css/bootstrap.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
 <link href="css/style.css" rel="stylesheet" />
 <title>addTask</title>
 </head>
@@ -49,7 +50,7 @@
 		<div class="row">
 
 			<div class="col-lg-6 col-xl-4" id="addTask">
-				<h1>タスクの追加</h1>
+				<h1 class="border-bottom" style="padding:10px;"><i class="bi bi-plus-square"></i> タスクの追加</h1>
 				<!-- <div class="container"> -->
 
 				<!-- 				<h1>task登録</h1> -->
@@ -146,7 +147,7 @@
 
 			</div>
 			<div class="col-lg-6 col-xl-5" id="taskList">
-				<h1>タスク一覧</h1>
+				<h1 class="border-bottom" style="padding:10px;"><i class="bi bi-card-list"></i> タスク一覧</h1>
 				<!-- <div class="card bg-light mb-3" style="max-width: 18rem;"> -->
 
 				<c:forEach items="${taskList}" var="task">
@@ -219,7 +220,7 @@
 
 
 			<div class="col-lg-6 col-xl-3" id="statistics">
-				<h1>統計</h1>
+				<h1 class="border-bottom" style="padding:10px;"><i class="bi bi-graph-up "></i> 統計</h1>
 				<div class="">
 
 					<table class="table table-borderd">
