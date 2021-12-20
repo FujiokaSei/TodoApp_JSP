@@ -172,6 +172,7 @@ public class TaskDaoImpl implements TaskDao {
 		task.setTimeLimit(rs.getTimestamp("time_limit"));
 		task.setUserId(rs.getInt("user_id"));
 		task.setTaskTypeId(rs.getInt("task_type_id"));
+		task.setPriorityId(rs.getInt("priority_id"));
 		return task;
 	}
 
