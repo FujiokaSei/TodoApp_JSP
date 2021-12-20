@@ -75,14 +75,10 @@ public class AddTaskServlet extends HttpServlet {
 				request.setAttribute("detailError", "※100文字以下で入力してください。");
 			}
 
-			//taskTypeId=10;
 			if (taskTypeId < 1 || taskTypeList.size() < taskTypeId) {
 				isError = true;
 				request.setAttribute("taskTypeError", "※タスク種別が無効です");
 			}
-
-			//timeLimitStrのNullチェック
-			//			Date timeLimit =
 
 			if (timeLimitStr == "") {
 				isError = true;
@@ -111,8 +107,8 @@ public class AddTaskServlet extends HttpServlet {
 			//task.setId(taskTypeId);
 			task.setTitle(title);
 			task.setDetail(detail);
-			task.setAddingTime(timeLimit);//TODO:現在時刻(nowSdfを利用)を入力する
-			task.setTimeLimit(timeLimit);//TODO:timeLimitをDATE型へ変換する
+			task.setAddingTime(timeLimit);
+			task.setTimeLimit(timeLimit);
 			task.setUserId(1);
 			task.setTaskTypeId(taskTypeId);
 			taskDao.insert(task);

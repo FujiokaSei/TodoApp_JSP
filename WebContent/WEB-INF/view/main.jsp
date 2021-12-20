@@ -164,8 +164,8 @@
 												</form>
 											</td>
 											<td>
-												<form action="/deleteTask" method="get">
-													<a href="deleteTask?id=<c:out value="${task.id}" />"
+												<form action="/completeTask" method="get">
+													<a href="completeTask?id=<c:out value="${task.id}" />"
 														class="btn btn-danger btn-sm">完了</a>
 												</form>
 											</td>
