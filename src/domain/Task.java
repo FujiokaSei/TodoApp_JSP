@@ -11,9 +11,12 @@ public class Task {
 	private Date timeLimit;
 	private Integer userId;
 	private Integer taskTypeId;
+	private Integer priorityId;
 
 	//コンストラクタの定義
-	public Task() {}
+	public Task() {
+	}
+
 	public Task(String title, String detail, Date addingTime, Date timeLimit, Integer userId, Integer taskTypeId) {
 		this.title = title;
 		this.detail = detail;
@@ -78,6 +81,14 @@ public class Task {
 
 	public void setTaskTypeId(Integer taskTypeId) {
 		this.taskTypeId = taskTypeId;
+	}
+
+	public Integer getPriorityId() {
+		return priorityId;
+	}
+
+	public void setPriorityId(Integer priorityId) {
+		this.priorityId = priorityId;
 	}
 
 }

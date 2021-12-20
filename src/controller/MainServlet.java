@@ -87,18 +87,54 @@ public class MainServlet extends HttpServlet {
 		 * TODO:③main.jspにフォワードする
 		 * */
 
+		//		try {
+		//			TaskDao taskDao = DaoFactory.createTaskDao();
+		//			TaskTypeDao taskTypeDao = DaoFactory.createTaskTypeDao();
+		//			List<Task> taskList = taskDao.findAll();
+		//			List<TaskType> taskTypeList = taskTypeDao.findAll();
+		//
+		//			/*統計のデータの処理を入れる
+		//			 *
+		//			 *
+		//			 * */
+		//			//findAllCount()のテスト
+		//			Integer num = taskDao.findAllCount();
+		//
+		//			SimpleDateFormat sdf = new SimpleDateFormat("y-MM-dd'T'HH:mm");
+		//			Date now = new Date();
+		//			String nowSdf = sdf.format(now);
+		//
+		//			request.setAttribute("now", nowSdf);
+		//			request.setAttribute("taskList", taskList);
+		//			request.setAttribute("taskTypeList", taskTypeList);
+		//
+		//			request.getRequestDispatcher("WEB-INF/view/main.jsp")
+		//					.forward(request, response);
+		//
+		//
+		//			System.out.println("doPOST");
+		//
+		//		} catch (Exception e) {
+		//			throw new ServletException(e);
+		//		}
+
 		try {
 			TaskDao taskDao = DaoFactory.createTaskDao();
 			TaskTypeDao taskTypeDao = DaoFactory.createTaskTypeDao();
-			List<Task> taskList = taskDao.findAll();
+			PriorityDao priorityDao = DaoFactory.createPriorityDao();
+			List<Task> taskList = taskDao.findNotDone();
 			List<TaskType> taskTypeList = taskTypeDao.findAll();
+			List<Priority> priorityList = priorityDao.findAll();
 
 			/*統計のデータの処理を入れる
 			 *
 			 *
 			 * */
 			//findAllCount()のテスト
-			Integer num = taskDao.findAllCount();
+			Integer allCount = taskDao.findAllCount();
+			Integer doneCount = taskDao.findDoneCount();
+			Integer notDoneCount = allCount - doneCount;
+			Double completingRate = Math.floor((double) doneCount / allCount * 100);
 
 			SimpleDateFormat sdf = new SimpleDateFormat("y-MM-dd'T'HH:mm");
 			Date now = new Date();
@@ -107,93 +143,19 @@ public class MainServlet extends HttpServlet {
 			request.setAttribute("now", nowSdf);
 			request.setAttribute("taskList", taskList);
 			request.setAttribute("taskTypeList", taskTypeList);
+			request.setAttribute("priorityList", priorityList);
+			request.setAttribute("allCount", allCount);
+			request.setAttribute("doneCount", doneCount);
+			request.setAttribute("notDoneCount", notDoneCount);
+			request.setAttribute("completingRate", completingRate);
 
 			request.getRequestDispatcher("WEB-INF/view/main.jsp")
 					.forward(request, response);
 
-			//
-			//			request.setAttribute("taskTypeList", taskTypeList);
-			//
-			//			String title = request.getParameter("title");
-			//			String detail = request.getParameter("detail");
-			//			Integer taskTypeId = Integer.parseInt(request.getParameter("taskTypeId"));
-			//			String timeLimitStr = request.getParameter("timeLimit");
-			//
-			//			//バリデーション
-			//			boolean isError = false;
-			//			if (title.isEmpty()) {
-			//				isError = true;
-			//				request.setAttribute("titleError", "※タスク名が未入力です。");
-			//			}
-			//
-			//			if (title.length() > 50) {
-			//				isError = true;
-			//				request.setAttribute("titleError", "※50文字以下で入力してください。");
-			//			}
-			//
-			//			if (detail.length() > 3000) {
-			//				isError = true;
-			//				request.setAttribute("detailError", "※3000文字以下で入力してください。");
-			//			}
-			//
-			//			//taskTypeId=10;
-			//			if (taskTypeId < 1 || taskTypeList.size() < taskTypeId) {
-			//				isError = true;
-			//				request.setAttribute("taskTypeError", "※タスク種別が無効です");
-			//			}
-			//
-			//			//timeLimitStrのNullチェック
-			//			Date timeLimit = null;
-			//
-			//			if (timeLimitStr == "") {
-			//				isError = true;
-			//				request.setAttribute("timeLimitError", "※期限を設定してください");
-			//			}
-			//
-			//			request.setAttribute("title", title);
-			//			request.setAttribute("detail", detail);
-			//			request.setAttribute("taskTypeId", taskTypeId);
-			//			request.setAttribute("timeLimit", timeLimitStr);
-			//			request.setAttribute("now", nowSdf);
-			//			request.setAttribute("taskTypeList", taskTypeList);
-			//
-			//			/*暫定対応
-			//			 * 期限入力に初期値を設定することで下記のParseException例外対策を不要とする。
-			//			 */
-			//			//			try {
-			//			//				timeLimit = sdf.parse(timeLimitStr);
-			//			//			} catch (ParseException e) {
-			//			//				request.getRequestDispatcher("WEB-INF/view/addTask.jsp")
-			//			//						.forward(request, response);
-			//			//			}
-			//
-			//			if (isError) {
-			//				request.getRequestDispatcher("WEB-INF/view/main.jsp")
-			//						.forward(request, response);
-			//				return;
-			//			}
-			//
-			//			//DBへデータを追加する
-			//			Task task = new Task();
-			//			//task.setId(taskTypeId);
-			//			task.setTitle(title);
-			//			task.setDetail(detail);
-			//			task.setAddingTime(timeLimit);
-			//			task.setTimeLimit(timeLimit);
-			//			task.setUserId(1);
-			//			task.setTaskTypeId(taskTypeId);
-			//			taskDao.insert(task);
-			//
-			//			System.out.println("title:" + title);
-			//			System.out.println("detail:" + detail);
-			//			System.out.println("taskType:" + taskTypeId);
-			//			System.out.println("timeLimit:" + timeLimit);
-			//			System.out.println("nowSdf:" + nowSdf);
-			//
-			//			System.out.println("insertしました");
-			System.out.println("doPOST");
+			System.out.println("doGet");
+		}
 
-		} catch (Exception e) {
+		catch (Exception e) {
 			throw new ServletException(e);
 		}
 

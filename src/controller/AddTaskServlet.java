@@ -12,10 +12,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.DaoFactory;
+import dao.PriorityDao;
 import dao.TaskDao;
-import dao.TaskTypeDao;
+import domain.Priority;
 import domain.Task;
-import domain.TaskType;
 
 /**
  * Servlet implementation class AddTaskServlet
@@ -38,15 +38,21 @@ public class AddTaskServlet extends HttpServlet {
 
 		try {
 			TaskDao taskDao = DaoFactory.createTaskDao();
-			TaskTypeDao taskTypeDao = DaoFactory.createTaskTypeDao();
+			//			TaskTypeDao taskTypeDao = DaoFactory.createTaskTypeDao();
+			PriorityDao priorityDao = DaoFactory.createPriorityDao();
 			List<Task> taskList = taskDao.findAll();
-			List<TaskType> taskTypeList = taskTypeDao.findAll();
+			//			List<TaskType> taskTypeList = taskTypeDao.findAll();
+			List<Priority> priorityList = priorityDao.findAll();
 
-			request.setAttribute("taskTypeList", taskTypeList);
+			request.setAttribute("priorityList", priorityList);
 
 			String title = request.getParameter("title");
 			String detail = request.getParameter("detail");
-			Integer taskTypeId = Integer.parseInt(request.getParameter("taskTypeId"));
+
+			//↓暫定対応↓後で修正する。
+			//Integer taskTypeId = Integer.parseInt(request.getParameter("taskTypeId"));
+			Integer taskTypeId = 1;
+			Integer priorityId = Integer.parseInt(request.getParameter("priorityId"));
 			String timeLimitStr = request.getParameter("timeLimit");
 
 			//DBへの書き込み用フォーマット
@@ -75,9 +81,9 @@ public class AddTaskServlet extends HttpServlet {
 				request.setAttribute("detailError", "※100文字以下で入力してください。");
 			}
 
-			if (taskTypeId < 1 || taskTypeList.size() < taskTypeId) {
+			if (priorityId < 1 || priorityList.size() < priorityId) {
 				isError = true;
-				request.setAttribute("taskTypeError", "※タスク種別が無効です");
+				request.setAttribute("priorityError", "※優先度が無効です");
 			}
 
 			if (timeLimitStr == "") {
@@ -91,11 +97,10 @@ public class AddTaskServlet extends HttpServlet {
 			if (isError) {
 				request.setAttribute("title", title);
 				request.setAttribute("detail", detail);
-				request.setAttribute("taskTypeId", taskTypeId);
-				/*				request.setAttribute("timeLimit", timeLimitStr);*/
+				request.setAttribute("priorityId", priorityId);
 				request.setAttribute("timeLimit", timeLimitStr);
 				request.setAttribute("now", nowSdf);
-				request.setAttribute("taskTypeList", taskTypeList);
+				request.setAttribute("priorityList", priorityList);
 
 				request.getRequestDispatcher("/main")
 						.forward(request, response);
@@ -104,18 +109,19 @@ public class AddTaskServlet extends HttpServlet {
 
 			//DBへデータを追加する
 			Task task = new Task();
-			//task.setId(taskTypeId);
 			task.setTitle(title);
 			task.setDetail(detail);
 			task.setAddingTime(timeLimit);
 			task.setTimeLimit(timeLimit);
 			task.setUserId(1);
 			task.setTaskTypeId(taskTypeId);
+			task.setPriorityId(priorityId);
 			taskDao.insert(task);
 
 			System.out.println("title:" + title);
 			System.out.println("detail:" + detail);
 			System.out.println("taskType:" + taskTypeId);
+			System.out.println("priorityId:" + priorityId);
 			System.out.println("timeLimit:" + timeLimitStr);
 			System.out.println("nowSdf:" + nowSdf);
 

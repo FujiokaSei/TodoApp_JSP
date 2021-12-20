@@ -56,14 +56,15 @@ public class TaskDaoImpl implements TaskDao {
 	public void insert(Task task) throws Exception {
 		try (Connection con = ds.getConnection()) {
 			String sql = "INSERT INTO task_board.tasks"
-					+ "(title, detail, adding_time, time_limit, user_id, task_type_id)VALUES"
-					+ " (?, ?, NOW(), ?, ?, ?)";
+					+ "(title, detail, adding_time, time_limit, user_id, task_type_id, priority_id)VALUES"
+					+ " (?, ?, NOW(), ?, ?, ?, ?)";
 			PreparedStatement stmt = con.prepareStatement(sql);
 			stmt.setString(1, task.getTitle());
 			stmt.setString(2, task.getDetail());
 			stmt.setObject(3, task.getTimeLimit(), Types.DATE);
 			stmt.setObject(4, task.getUserId(), Types.INTEGER);
 			stmt.setObject(5, task.getTaskTypeId(), Types.INTEGER);
+			stmt.setObject(6, task.getPriorityId(), Types.INTEGER);
 			stmt.executeUpdate();
 
 		} catch (Exception e) {
@@ -96,7 +97,7 @@ public class TaskDaoImpl implements TaskDao {
 		try (Connection con = ds.getConnection()) {
 			String sql = "SELECT * FROM task_board.tasks "
 					+ "WHERE(task_type_id <> 3) "
-					+ "ORDER BY time_limit ASC;";
+					+ "ORDER BY time_limit ASC, priority_id DESC;";
 			PreparedStatement stmt = con.prepareStatement(sql);
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
