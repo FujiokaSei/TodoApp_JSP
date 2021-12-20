@@ -19,60 +19,51 @@ import domain.User;
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//		response.getWriter().append("Served at: ").append(request.getContextPath());
 		request.getRequestDispatcher("WEB-INF/view/login.jsp")
 				.forward(request, response);
-
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		//TODO:作成中。後で見直すこと
+		try {
+			String loginId = request.getParameter("loginId");
+			String loginPass = request.getParameter("loginPass");
 
-	    try {
-	        String loginId = request.getParameter("loginId");
-	        String loginPass = request.getParameter("loginPass");
+			request.setAttribute("loginId", loginId);
 
-	        request.setAttribute("loginId", loginId);
+			// バリデーション
+			boolean isError = false;
+			if (loginId.isEmpty()) {
+				isError = true;
+				request.setAttribute("loginIdError", "※ログインIDが未入力です。");
+			}
+			if (loginPass.isEmpty()) {
+				isError = true;
+				request.setAttribute("loginPassError", "※パスワードが未入力です。");
+			}
+			if (isError) {
+				request.getRequestDispatcher("/WEB-INF/view/login.jsp")
+						.forward(request, response);
+				return;
+			}
 
-	        // バリデーション
-	        boolean isError = false;
-	        if (loginId.isEmpty()) {
-	          isError = true;
-	          request.setAttribute("loginIdError", "※ログインIDが未入力です。");
-	        }
-	        if (loginPass.isEmpty()) {
-	          isError = true;
-	          request.setAttribute("loginPassError", "※パスワードが未入力です。");
-	        }
-	        if (isError) {
-	            request.getRequestDispatcher("/WEB-INF/view/login.jsp")
-	                .forward(request, response);
-	            return;
-	        }
-
-	        UserDao userDao = DaoFactory.createUserDao();
-	        User user = userDao.findByLoginIdAndLoginPass(loginId, loginPass);
-	        if (user != null) {
-	          request.getSession().setAttribute("userName", user.getName());
-	          response.sendRedirect("main");
-	        } else {
-	          request.setAttribute("error", true);
-	          request.getRequestDispatcher("/WEB-INF/view/login.jsp")
-	            .forward(request, response);
-	        }
-	      } catch (Exception e) {
-	        throw new ServletException(e);
-	      }
+			UserDao userDao = DaoFactory.createUserDao();
+			User user = userDao.findByLoginIdAndLoginPass(loginId, loginPass);
+			if (user != null) {
+				request.getSession().setAttribute("userName", user.getName());
+				response.sendRedirect("main");
+			} else {
+				request.setAttribute("error", true);
+				request.getRequestDispatcher("/WEB-INF/view/login.jsp")
+						.forward(request, response);
+			}
+		} catch (Exception e) {
+			throw new ServletException(e);
+		}
 	}
 
 }
