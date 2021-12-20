@@ -42,16 +42,21 @@ public class AddTaskServlet extends HttpServlet {
 			List<Task> taskList = taskDao.findAll();
 			List<TaskType> taskTypeList = taskTypeDao.findAll();
 
-			SimpleDateFormat sdf = new SimpleDateFormat("y-MM-dd'T'HH:mm");
-			Date now = new Date();
-			String nowSdf = sdf.format(now);
-
 			request.setAttribute("taskTypeList", taskTypeList);
 
 			String title = request.getParameter("title");
 			String detail = request.getParameter("detail");
 			Integer taskTypeId = Integer.parseInt(request.getParameter("taskTypeId"));
 			String timeLimitStr = request.getParameter("timeLimit");
+
+			//DBへの書き込み用フォーマット
+			SimpleDateFormat sdfDB = new SimpleDateFormat("y-MM-dd HH:mm");
+			Date timeLimit = null;
+
+			//JSPにフォワードするためのsdfフォーマット
+			SimpleDateFormat sdf = new SimpleDateFormat("y-MM-dd'T'HH:mm");
+			Date now = new Date();
+			String nowSdf = sdf.format(now);
 
 			//バリデーション
 			boolean isError = false;
@@ -77,19 +82,21 @@ public class AddTaskServlet extends HttpServlet {
 			}
 
 			//timeLimitStrのNullチェック
-			Date timeLimit = null;
+			//			Date timeLimit =
 
 			if (timeLimitStr == "") {
 				isError = true;
 				request.setAttribute("timeLimitError", "※期限を設定してください");
+			} else {
+				timeLimitStr = timeLimitStr.replace("T", " ");
+				timeLimit = sdfDB.parse(timeLimitStr);
 			}
-
-
 
 			if (isError) {
 				request.setAttribute("title", title);
 				request.setAttribute("detail", detail);
 				request.setAttribute("taskTypeId", taskTypeId);
+				/*				request.setAttribute("timeLimit", timeLimitStr);*/
 				request.setAttribute("timeLimit", timeLimitStr);
 				request.setAttribute("now", nowSdf);
 				request.setAttribute("taskTypeList", taskTypeList);
@@ -104,8 +111,8 @@ public class AddTaskServlet extends HttpServlet {
 			//task.setId(taskTypeId);
 			task.setTitle(title);
 			task.setDetail(detail);
-			task.setAddingTime(timeLimit);
-			task.setTimeLimit(timeLimit);
+			task.setAddingTime(timeLimit);//TODO:現在時刻(nowSdfを利用)を入力する
+			task.setTimeLimit(timeLimit);//TODO:timeLimitをDATE型へ変換する
 			task.setUserId(1);
 			task.setTaskTypeId(taskTypeId);
 			taskDao.insert(task);
@@ -113,13 +120,13 @@ public class AddTaskServlet extends HttpServlet {
 			System.out.println("title:" + title);
 			System.out.println("detail:" + detail);
 			System.out.println("taskType:" + taskTypeId);
-			System.out.println("timeLimit:" + timeLimit);
+			System.out.println("timeLimit:" + timeLimitStr);
 			System.out.println("nowSdf:" + nowSdf);
 
 			System.out.println("insertしました");
 
 			request.getRequestDispatcher("/main")
-			.forward(request, response);
+					.forward(request, response);
 
 		} catch (Exception e) {
 			throw new ServletException(e);

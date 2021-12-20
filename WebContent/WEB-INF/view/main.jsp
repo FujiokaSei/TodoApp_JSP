@@ -34,7 +34,7 @@
 		</nav>
 	</header>
 
-<%--編集ボタン押下後、c:chooseが機能しているかどうかのテスト 	<c:choose>
+	<%--編集ボタン押下後、c:chooseが機能しているかどうかのテスト 	<c:choose>
 		<c:when test="${!empty mode}">
 			<p>editMode</p>
 		</c:when>
@@ -119,8 +119,11 @@
 										<c:out value="${timeLimitError}" />
 									</div>
 								</c:if>
-								<input type="datetime-local" name="timeLimit" id="formTimeLimit"
+								<%-- <input type="datetime-local" name="timeLimit" id="formTimeLimit"
 									value="<c:out value="${now}"/>" min="<c:out value="${now}"/>"
+									class="form-control" /> --%>
+								<input type="datetime-local" name="timeLimit" id="formTimeLimit"
+									min="<c:out value="${now}"/>"
 									class="form-control" />
 							</div>
 
@@ -143,8 +146,8 @@
 				<h1>タスク一覧</h1>
 				<!-- <div class="card bg-light mb-3" style="max-width: 18rem;"> -->
 
-					<c:forEach items="${taskList}" var="task">
-				<div class="card bg-light mb-3">
+				<c:forEach items="${taskList}" var="task">
+					<div class="card bg-light mb-3">
 						<div class="card-header">
 							<div class="row">
 								<div class="col-9" id="title">
@@ -181,7 +184,11 @@
 							<!-- <h5 class="card-title">Light card title</h5> -->
 							<div class="row" id="timeLimit">
 
-								<p>期限：<c:out value="${task.timeLimit}" /></p>
+								<p>
+									期限：
+									<fmt:formatDate value="${task.timeLimit}"
+										pattern="y年M月d日 HH時mm分" />
+								</p>
 
 							</div>
 
@@ -189,7 +196,6 @@
 
 								<div class="col-10">
 									<p class="card-text" id="detail">
-										<
 										<c:out value="${task.detail}" />
 									</p>
 								</div>
@@ -202,8 +208,8 @@
 
 						</div>
 						<p></p>
-				</div>
-					</c:forEach>
+					</div>
+				</c:forEach>
 
 
 			</div>
