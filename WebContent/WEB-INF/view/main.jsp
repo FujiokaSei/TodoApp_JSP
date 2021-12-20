@@ -155,7 +155,7 @@
 				</h1>
 				<!-- <div class="card bg-light mb-3" style="max-width: 18rem;"> -->
 
-				<c:forEach items="${taskList}" var="task">
+				<c:forEach items="${taskList}" var="task" varStatus="count">
 					<div class="card bg-light mb-3">
 						<div class="card-header">
 							<div class="row">
@@ -187,20 +187,19 @@
 						<div class="card-body">
 							<!-- <h5 class="card-title">Light card title</h5> -->
 							<div class="row" id="timeLimit">
-
-								<p>
-									<b>期限：</b>
-									<fmt:formatDate value="${task.timeLimit}"
-										pattern="y年M月d日 HH時mm分" />
-									<b>優先度：</b>
-									<c:forEach items="${priorityList}" var="priority">
-										<c:if test="${priority.id==task.priorityId}">
-											<c:out value="${priority.name}" />
-										</c:if>
-									</c:forEach>
-
-								</p>
-
+									<p class="" id="${count.index}">
+										<b>期限：</b>
+										<fmt:formatDate value="${task.timeLimit}"
+											pattern="y年M月d日 HH時mm分" />
+										<b>優先度：</b>
+										<c:forEach items="${priorityList}" var="priority">
+											<c:if test="${priority.id==task.priorityId}">
+												<!-- <div class="" id="priority"> -->
+													<c:out value="${priority.name}" />
+												<!-- </div> -->
+											</c:if>
+										</c:forEach>
+									</p>
 							</div>
 
 							<div class="row">
@@ -221,8 +220,6 @@
 						<p></p>
 					</div>
 				</c:forEach>
-
-
 			</div>
 
 
@@ -249,9 +246,7 @@
 							<th>完遂率</th>
 							<td><c:out value="${completingRate}" />%</td>
 						</tr>
-
 					</table>
-
 				</div>
 			</div>
 
@@ -264,11 +259,56 @@
 
 	<script>
 		$(function() {
+			//crearボタン押下時に動作する
 			$('#clear').click(function() {
 				$('#formTitle').val("");
 				$('#formDetail').val("");
 			});
 
+			/* //優先度別の色分け
+			//定数を宣言,低/中/高の文字列
+			const lowText = "低";
+			const middleText = "中";
+			const highText = "高";
+
+ 			//対象タスクの重要度を取得する
+			let priorityText = $('#priority').text().trim();
+
+			//console.log('#timeLimit'+' #'+3);
+
+			//for文を回す
+			while(){
+
+				let $('#timeLimit'+' #'+i').attr(priority,);
+			}
+
+
+
+
+			console.log('#timeLimit'+' #'+ 3);
+
+			//if文(低/中/高で場合分け)
+			switch (priorityText) {
+			case lowText:
+				console.log("lowです");
+				break;
+
+			case middleText:
+				console.log("middleです");
+				break;
+
+			case highText:
+				console.log("highです");
+				break;
+			}
+
+			//クラスを追加する
+			$("#priority").addClass("text-danger");
+
+			console.log(priorityText);
+
+			//
+ */
 		});
 	</script>
 

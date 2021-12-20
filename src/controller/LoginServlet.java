@@ -38,6 +38,7 @@ public class LoginServlet extends HttpServlet {
 			// バリデーション
 			boolean isError = false;
 			if (loginId.isEmpty()) {
+				System.out.println("バリデーション");
 				isError = true;
 				request.setAttribute("loginIdError", "※ログインIDが未入力です。");
 			}
