@@ -35,6 +35,16 @@ public class MainServlet extends HttpServlet {
 			List<Task> taskList = taskDao.findNotDone();
 			List<TaskType> taskTypeList = taskTypeDao.findAll();
 
+			/*統計のデータの処理を入れる
+			 *
+			 *
+			 * */
+			//findAllCount()のテスト
+			Integer allCount = taskDao.findAllCount();
+			Integer doneCount = taskDao.findDoneCount();
+			Integer notDoneCount = allCount - doneCount;
+			Double completingRate = Math.floor((double) doneCount / allCount * 100);
+
 			SimpleDateFormat sdf = new SimpleDateFormat("y-MM-dd'T'HH:mm");
 			Date now = new Date();
 			String nowSdf = sdf.format(now);
@@ -42,6 +52,10 @@ public class MainServlet extends HttpServlet {
 			request.setAttribute("now", nowSdf);
 			request.setAttribute("taskList", taskList);
 			request.setAttribute("taskTypeList", taskTypeList);
+			request.setAttribute("allCount", allCount);
+			request.setAttribute("doneCount", doneCount);
+			request.setAttribute("notDoneCount", notDoneCount);
+			request.setAttribute("completingRate", completingRate);
 
 			request.getRequestDispatcher("WEB-INF/view/main.jsp")
 					.forward(request, response);
@@ -74,6 +88,13 @@ public class MainServlet extends HttpServlet {
 			List<Task> taskList = taskDao.findAll();
 			List<TaskType> taskTypeList = taskTypeDao.findAll();
 
+			/*統計のデータの処理を入れる
+			 *
+			 *
+			 * */
+			//findAllCount()のテスト
+			Integer num = taskDao.findAllCount();
+
 			SimpleDateFormat sdf = new SimpleDateFormat("y-MM-dd'T'HH:mm");
 			Date now = new Date();
 			String nowSdf = sdf.format(now);
@@ -84,7 +105,6 @@ public class MainServlet extends HttpServlet {
 
 			request.getRequestDispatcher("WEB-INF/view/main.jsp")
 					.forward(request, response);
-
 
 			//
 			//			request.setAttribute("taskTypeList", taskTypeList);

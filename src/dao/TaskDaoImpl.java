@@ -50,7 +50,6 @@ public class TaskDaoImpl implements TaskDao {
 			throw e;
 		}
 		return task;
-
 	}
 
 	@Override
@@ -70,7 +69,6 @@ public class TaskDaoImpl implements TaskDao {
 		} catch (Exception e) {
 			throw e;
 		}
-
 	}
 
 	@Override
@@ -122,7 +120,46 @@ public class TaskDaoImpl implements TaskDao {
 		} catch (Exception e) {
 			throw e;
 		}
+	}
 
+	@Override
+	public Integer findDoneCount() throws Exception {
+		Integer doneCount = null;
+		try (Connection con = ds.getConnection()) {
+			String sql = "SELECT COUNT(*) AS count FROM task_board.tasks WHERE task_type_id = 3;";
+			PreparedStatement stmt = con.prepareStatement(sql);
+			ResultSet rs = stmt.executeQuery();
+
+			while (rs.next()) {
+				doneCount = mapToInt(rs);
+			}
+		} catch (Exception e) {
+			throw e;
+		}
+		return doneCount;
+	}
+
+	@Override
+	public Integer findNotDoneCount() throws Exception {
+		// TODO 自動生成されたメソッド・スタブ
+		return null;
+	}
+
+	@Override
+	public Integer findAllCount() throws Exception {
+		Integer allCount = null;
+		try (Connection con = ds.getConnection()) {
+			String sql = "SELECT COUNT(*) AS count FROM task_board.tasks;";
+			PreparedStatement stmt = con.prepareStatement(sql);
+			ResultSet rs = stmt.executeQuery();
+
+			while (rs.next()) {
+				allCount = mapToInt(rs);
+			}
+		} catch (Exception e) {
+			throw e;
+		}
+		return allCount;
 	}
 
 	protected Task mapToTask(ResultSet rs) throws Exception {
@@ -137,22 +174,10 @@ public class TaskDaoImpl implements TaskDao {
 		return task;
 	}
 
-	@Override
-	public Integer findDoneCount() throws Exception {
-		// TODO 自動生成されたメソッド・スタブ
-		return null;
-	}
-
-	@Override
-	public Integer findNotDoneCount() throws Exception {
-		// TODO 自動生成されたメソッド・スタブ
-		return null;
-	}
-
-	@Override
-	public Integer findAllCount() throws Exception {
-		// TODO 自動生成されたメソッド・スタブ
-		return null;
+	protected Integer mapToInt(ResultSet rs) throws Exception {
+		Integer num;
+		num = rs.getInt("count");
+		return num;
 	}
 
 }

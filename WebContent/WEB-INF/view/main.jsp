@@ -123,8 +123,7 @@
 									value="<c:out value="${now}"/>" min="<c:out value="${now}"/>"
 									class="form-control" /> --%>
 								<input type="datetime-local" name="timeLimit" id="formTimeLimit"
-									min="<c:out value="${now}"/>"
-									class="form-control" />
+									min="<c:out value="${now}"/>" class="form-control" />
 							</div>
 
 
@@ -221,14 +220,22 @@
 
 					<table class="table table-borderd">
 						<tr>
-							<th>残タスク</th>
-							<td>〇〇/〇〇(件)</td>
+							<th>全タスク</th>
+							<td><c:out value="${allCount}" />件</td>
 						</tr>
-						<th>完了済みタスク</th>
-						<td>〇件</td>
+						<tr>
+							<th>残タスク</th>
+							<td><c:out value="${notDoneCount}"/>件
+							</td>
+						</tr>
+						<tr>
+							<th>完了済みタスク</th>
+							<td><c:out value="${doneCount}" />件
+							</td>
+						</tr>
 						<tr>
 							<th>完遂率</th>
-							<td>〇〇%</td>
+							<td><c:out value="${completingRate}"/>%</td>
 						</tr>
 
 					</table>
