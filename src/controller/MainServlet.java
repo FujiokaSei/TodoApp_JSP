@@ -12,8 +12,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.DaoFactory;
+import dao.PriorityDao;
 import dao.TaskDao;
 import dao.TaskTypeDao;
+import domain.Priority;
 import domain.Task;
 import domain.TaskType;
 
@@ -32,8 +34,10 @@ public class MainServlet extends HttpServlet {
 		try {
 			TaskDao taskDao = DaoFactory.createTaskDao();
 			TaskTypeDao taskTypeDao = DaoFactory.createTaskTypeDao();
+			PriorityDao priorityDao = DaoFactory.createPriorityDao();
 			List<Task> taskList = taskDao.findNotDone();
 			List<TaskType> taskTypeList = taskTypeDao.findAll();
+			List<Priority> priorityList = priorityDao.findAll();
 
 			/*統計のデータの処理を入れる
 			 *
@@ -52,6 +56,7 @@ public class MainServlet extends HttpServlet {
 			request.setAttribute("now", nowSdf);
 			request.setAttribute("taskList", taskList);
 			request.setAttribute("taskTypeList", taskTypeList);
+			request.setAttribute("priorityList", priorityList);
 			request.setAttribute("allCount", allCount);
 			request.setAttribute("doneCount", doneCount);
 			request.setAttribute("notDoneCount", notDoneCount);

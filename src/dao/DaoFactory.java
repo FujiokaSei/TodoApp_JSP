@@ -21,6 +21,10 @@ public class DaoFactory {
 		return new UserDaoImpl(getDataSource());
 	}
 
+	public static PriorityDao createPriorityDao() {
+		return new PriorityDaoImpl(getDataSource());
+	}
+
 	private static DataSource getDataSource() {
 		InitialContext ctx = null;
 		DataSource ds = null;

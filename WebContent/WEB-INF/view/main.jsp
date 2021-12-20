@@ -96,17 +96,17 @@
 							<!-- 種別 type -->
 							<div class="form-inline addClear">
 								<div class="form-group">
-									<label for="formType" style="margin: 10px 10px 10px 0px">種別</label>
-									<c:if test="${not empty taskTypeError}">
+									<label for="formType" style="margin: 10px 10px 10px 0px">優先度</label>
+									<c:if test="${not empty priorityError}">
 										<div class="alert alert-danger" role="alert">
-											<c:out value="${taskTypeError }" />
+											<c:out value="${priorityError }" />
 										</div>
 									</c:if>
-									<select name="taskTypeId" id="formType" class="form-control">
-										<c:forEach items="${taskTypeList}" var="taskType">
-											<option value="<c:out value="${taskType.id}" />"
-												<c:if test="${taskType.id == taskTypeId}">selected</c:if>>
-												<c:out value="${taskType.name}" />
+									<select name="priorityId" id="formType" class="form-control">
+										<c:forEach items="${priorityList}" var="priority">
+											<option value="<c:out value="${priority.id}" />"
+												<c:if test="${priority.id == priorityId}">selected</c:if>>
+												<c:out value="${priority.name}" />
 											</option>
 										</c:forEach>
 									</select>
@@ -114,7 +114,7 @@
 
 								<!-- 期限 calendar -->
 								<div class="form-group">
-									<label for="forTimeLimit" style="margin:10px 10px ">期限</label>
+									<label for="forTimeLimit" style="margin: 10px 10px">期限</label>
 									<c:if test="${not empty timeLimitError}">
 										<div class="alert alert-danger" role="alert">
 											<c:out value="${timeLimitError}" />
@@ -131,10 +131,10 @@
 
 
 
-							<div class="form-group" style="margin-top:10px;">
+							<div class="form-group" style="margin-top: 10px;">
 								<!-- <div class="text-left"> -->
-									<input type="submit" class="btn btn-primary" value="追加" /> <input
-										type="button" id="clear" class="btn btn-secondary" value="クリア">
+								<input type="submit" class="btn btn-primary" value="追加" /> <input
+									type="button" id="clear" class="btn btn-secondary" value="クリア">
 								<!-- </div> -->
 							</div>
 
