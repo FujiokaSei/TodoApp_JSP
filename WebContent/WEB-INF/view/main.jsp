@@ -94,44 +94,48 @@
 							</div>
 
 							<!-- 種別 type -->
-							<div class="form-group">
-								<label for="formType">種別</label>
-								<c:if test="${not empty taskTypeError}">
-									<div class="alert alert-danger" role="alert">
-										<c:out value="${taskTypeError }" />
-									</div>
-								</c:if>
-								<select name="taskTypeId" id="formType" class="form-control">
-									<c:forEach items="${taskTypeList}" var="taskType">
-										<option value="<c:out value="${taskType.id}" />"
-											<c:if test="${taskType.id == taskTypeId}">selected</c:if>>
-											<c:out value="${taskType.name}" />
-										</option>
-									</c:forEach>
-								</select>
-							</div>
+							<div class="form-inline addClear">
+								<div class="form-group">
+									<label for="formType" style="margin: 10px 10px 10px 0px">種別</label>
+									<c:if test="${not empty taskTypeError}">
+										<div class="alert alert-danger" role="alert">
+											<c:out value="${taskTypeError }" />
+										</div>
+									</c:if>
+									<select name="taskTypeId" id="formType" class="form-control">
+										<c:forEach items="${taskTypeList}" var="taskType">
+											<option value="<c:out value="${taskType.id}" />"
+												<c:if test="${taskType.id == taskTypeId}">selected</c:if>>
+												<c:out value="${taskType.name}" />
+											</option>
+										</c:forEach>
+									</select>
+								</div>
 
-							<!-- 期限 calendar -->
-							<div class="form-group">
-								<label for="forTimeLimit">期限</label>
-								<c:if test="${not empty timeLimitError}">
-									<div class="alert alert-danger" role="alert">
-										<c:out value="${timeLimitError}" />
-									</div>
-								</c:if>
-								<%-- <input type="datetime-local" name="timeLimit" id="formTimeLimit"
+								<!-- 期限 calendar -->
+								<div class="form-group">
+									<label for="forTimeLimit" style="margin:10px 10px ">期限</label>
+									<c:if test="${not empty timeLimitError}">
+										<div class="alert alert-danger" role="alert">
+											<c:out value="${timeLimitError}" />
+										</div>
+									</c:if>
+									<%-- <input type="datetime-local" name="timeLimit" id="formTimeLimit"
 									value="<c:out value="${now}"/>" min="<c:out value="${now}"/>"
 									class="form-control" /> --%>
-								<input type="datetime-local" name="timeLimit" id="formTimeLimit"
-									min="<c:out value="${now}"/>" class="form-control" />
+									<input type="datetime-local" name="timeLimit"
+										id="formTimeLimit" min="<c:out value="${now}"/>"
+										class="form-control" />
+								</div>
 							</div>
 
 
 
-
-							<div class="form-group">
-								<input type="submit" class="btn btn-primary" value="追加" /> <input
-									type="button" id="clear" class="btn btn-secondary" value="クリア">
+							<div class="form-group" style="margin-top:10px;">
+								<!-- <div class="text-left"> -->
+									<input type="submit" class="btn btn-primary" value="追加" /> <input
+										type="button" id="clear" class="btn btn-secondary" value="クリア">
+								<!-- </div> -->
 							</div>
 
 						</form>
@@ -225,17 +229,15 @@
 						</tr>
 						<tr>
 							<th>残タスク</th>
-							<td><c:out value="${notDoneCount}"/>件
-							</td>
+							<td><c:out value="${notDoneCount}" />件</td>
 						</tr>
 						<tr>
 							<th>完了済みタスク</th>
-							<td><c:out value="${doneCount}" />件
-							</td>
+							<td><c:out value="${doneCount}" />件</td>
 						</tr>
 						<tr>
 							<th>完遂率</th>
-							<td><c:out value="${completingRate}"/>%</td>
+							<td><c:out value="${completingRate}" />%</td>
 						</tr>
 
 					</table>
