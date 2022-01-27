@@ -49,6 +49,7 @@ public class MainServlet extends HttpServlet {
 			Integer notDoneCount = allCount - doneCount;
 			Double completingRate = Math.floor((double) doneCount / allCount * 100);
 
+
 			SimpleDateFormat sdf = new SimpleDateFormat("y-MM-dd'T'HH:mm");
 			Date now = new Date();
 			String nowSdf = sdf.format(now);

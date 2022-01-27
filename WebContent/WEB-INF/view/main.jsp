@@ -36,30 +36,18 @@
 		</nav>
 	</header>
 
-	<%--編集ボタン押下後、c:chooseが機能しているかどうかのテスト 	<c:choose>
-		<c:when test="${!empty mode}">
-			<p>editMode</p>
-		</c:when>
-		<c:otherwise>
-			<p>test</p>
-		</c:otherwise>
-
-	</c:choose> --%>
-
 
 	<div class="container-fluid">
 		<div class="row">
 
 			<div class="col-lg-6 col-xl-4" id="addTask">
-				<h1 class="border-bottom" style="padding: 10px;">
-					<i class="bi bi-plus-square"></i> タスクの追加
+				<h1 class="border-bottom addTaskTitle" style="padding: 10px;">
+					<i class="bi bi-pencil-square"></i> タスクの作成
 				</h1>
-				<!-- <div class="container"> -->
 
-				<!-- 				<h1>task登録</h1> -->
 				<div class="row">
 					<div class="col-md-12 col-xl-12">
-						<form action="addTask" method="post">
+						<form action="addTask" method="post" class="addTaskButton">
 
 							<!--タイトル text-->
 							<div class="form-group">
@@ -71,17 +59,8 @@
 									</div>
 								</c:if>
 								<input type="text" name="title" id="formTitle"
-									class="form-control" value="<c:out value="${title}" />" />
-
-								<%--編集ボタン押下後、フォームに文字列を入れる。
-																<input type="text" name="title" id="formTitle"
 									class="form-control"
-									value="<c:choose>
-										<c:when test="${!empty mode}"><c:out value="${editTask.title}" /></c:when>
-										<c:otherwise>	<c:out value="${title}"/></c:otherwise>
-										</c:choose>" /> --%>
-
-
+									value="<c:out value="${editTask.title}" default="" />" />
 
 							</div>
 
@@ -94,7 +73,7 @@
 									</div>
 								</c:if>
 								<textarea name="detail" id="formDetail" class="form-control"><c:out
-										value="${detail}" /></textarea>
+										value="${editTask.detail}" default="" /></textarea>
 							</div>
 
 							<!-- 種別 type -->
@@ -106,10 +85,13 @@
 											<c:out value="${priorityError }" />
 										</div>
 									</c:if>
-									<select name="priorityId" id="formType" class="form-control">
+
+									<select name="priorityId" id="formType"
+										class="form-control priorityForm" required>
+
 										<c:forEach items="${priorityList}" var="priority">
 											<option value="<c:out value="${priority.id}" />"
-												<c:if test="${priority.id == priorityId}">selected</c:if>>
+												<c:if test="${priority.id == editTask.priorityId}">selected</c:if>>
 												<c:out value="${priority.name}" />
 											</option>
 										</c:forEach>
@@ -128,7 +110,7 @@
 									value="<c:out value="${now}"/>" min="<c:out value="${now}"/>"
 									class="form-control" /> --%>
 									<input type="datetime-local" name="timeLimit"
-										value="<c:out value="${now}"/>" id="formTimeLimit"
+										value="<c:out value="${timeLimit}"/>" id="formTimeLimit"
 										min="<c:out value="${now}"/>" class="form-control" required />
 								</div>
 							</div>
@@ -137,8 +119,10 @@
 
 							<div class="form-group" style="margin-top: 10px;">
 								<!-- <div class="text-left"> -->
-								<input type="submit" class="btn btn-primary" value="追加" /> <input
-									type="button" id="clear" class="btn btn-secondary" value="クリア">
+								<input type="submit" class="btn btn-primary addButton"value="追加" />
+									<a href="/main" class="clearButton btn btn-secondary">クリア</a>
+
+
 								<!-- </div> -->
 							</div>
 
@@ -169,7 +153,7 @@
 											<td id="edit">
 												<form action="/editTask" method="get" id="editButton">
 													<a href="editTask?id=<c:out value="${task.id}" />"
-														class="btn btn-success btn-sm" id="editDelete">編集</a>
+													class="btn btn-success btn-sm" id="editDelete">編集</a>
 												</form>
 											</td>
 											<td>
@@ -187,19 +171,19 @@
 						<div class="card-body">
 							<!-- <h5 class="card-title">Light card title</h5> -->
 							<div class="row" id="timeLimit">
-									<p class="" id="${count.index}">
-										<b>期限：</b>
-										<fmt:formatDate value="${task.timeLimit}"
-											pattern="y年M月d日 HH時mm分" />
-										<b>優先度：</b>
-										<c:forEach items="${priorityList}" var="priority">
-											<c:if test="${priority.id==task.priorityId}">
-												<!-- <div class="" id="priority"> -->
-													<c:out value="${priority.name}" />
-												<!-- </div> -->
-											</c:if>
-										</c:forEach>
-									</p>
+								<p class="" id="${count.index}">
+									<b>期限：</b>
+									<fmt:formatDate value="${task.timeLimit}"
+										pattern="y年M月d日 HH時mm分" />
+									<b>優先度：</b>
+									<c:forEach items="${priorityList}" var="priority">
+										<c:if test="${priority.id==task.priorityId}">
+											<!-- <div class="" id="priority"> -->
+											<c:out value="${priority.name}" />
+											<!-- </div> -->
+										</c:if>
+									</c:forEach>
+								</p>
 							</div>
 
 							<div class="row">
@@ -225,7 +209,7 @@
 
 			<div class="col-lg-6 col-xl-3" id="statistics">
 				<h1 class="border-bottom" style="padding: 10px;">
-					<i class="bi bi-graph-up "></i> 統計
+					<i class="bi bi-graph-up "></i> データ
 				</h1>
 				<div class="">
 
@@ -265,13 +249,35 @@
 				$('#formDetail').val("");
 			});
 
+			//ページ更新・読み込み時に動作する
+			$(document)
+					.ready(
+							function() {
+								//URLを読み取り、編集モードに切り替える
+								if (location.pathname == "/TaskBoard/editTask") {
+									$(".addButton").attr("value", "更新");
+									$(".clearButton").attr("value", "編集をやめる");
+									$(".clearButton").text("編集をやめる");
+									$(".addTaskButton").attr("action","editTask");
+									$(".addTaskButton").attr("method","post");
+
+
+									//action="addTask" method="post"
+								} else {
+								}
+							});
+
+			/* //優先度の初期値を設定する
+			const priorityId = $(location).attr('search').substr(4, 5);
+			console.log(priorityId); */
+
 			/* //優先度別の色分け
 			//定数を宣言,低/中/高の文字列
 			const lowText = "低";
 			const middleText = "中";
 			const highText = "高";
 
- 			//対象タスクの重要度を取得する
+			//対象タスクの重要度を取得する
 			let priorityText = $('#priority').text().trim();
 
 			//console.log('#timeLimit'+' #'+3);
@@ -308,7 +314,7 @@
 			console.log(priorityText);
 
 			//
- */
+			 */
 		});
 	</script>
 
