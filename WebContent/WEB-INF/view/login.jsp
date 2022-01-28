@@ -29,6 +29,13 @@
 			<div class="col-md-offset-3 col-md-6 mx-auto">
 				<div class="panel panel-default">
 					<div class="panel-heading">Task管理システム ログイン</div>
+
+					<c:if test="${not empty message}">
+						<div class="alert alert-danger" role="alert">
+							<c:out value="${message}" />
+						</div>
+					</c:if>
+
 					<div class="panel-body">
 						<c:if test="${not empty error}">
 							<div class="alert alert-danger">ログインIDかパスワードが正しくありません。</div>

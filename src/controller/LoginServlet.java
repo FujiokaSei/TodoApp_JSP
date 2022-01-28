@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dao.DaoFactory;
 import dao.UserDao;
@@ -21,8 +22,24 @@ public class LoginServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		//		response.getWriter().append("Served at: ").append(request.getContextPath());
+
+		HttpSession session = request.getSession();
+		String status = "";
+
+		//nullの場合：statusに格納しない。
+		if (session != null || session.getAttribute("status") != null) {
+			status = (String) session.getAttribute("status");
+			System.out.println(status);
+			//if文。logoutのメッセージの有無で処理を分ける
+			if (status == "login") {
+				//logoutした場合
+				request.setAttribute("message", "ログアウトしました");
+			}
+		}
+
+		System.out.println("受け取りました。");
+
+		request.getSession().invalidate();
 		request.getRequestDispatcher("WEB-INF/view/login.jsp")
 				.forward(request, response);
 	}
@@ -56,6 +73,7 @@ public class LoginServlet extends HttpServlet {
 			User user = userDao.findByLoginIdAndLoginPass(loginId, loginPass);
 			if (user != null) {
 				request.getSession().setAttribute("userName", user.getName());
+				request.getSession().setAttribute("status", "login");
 				response.sendRedirect("main");
 			} else {
 				request.setAttribute("error", true);

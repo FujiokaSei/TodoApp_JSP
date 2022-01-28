@@ -23,7 +23,7 @@
 					<table>
 						<tr>
 							<td><a class="navbar-brand" href="#">TodoApp</a></td>
-							<td><a href="logout" class="btn btn-danger">ログアウト</a></td>
+							<td><a href="login" class="btn btn-danger">ログアウト</a></td>
 						</tr>
 
 					</table>
@@ -42,12 +42,13 @@
 
 			<div class="col-lg-6 col-xl-4" id="addTask">
 				<h1 class="border-bottom addTaskTitle" style="padding: 10px;">
-					<i class="bi bi-pencil-square"></i> タスクの作成
+					<i class="bi bi-pencil-square"></i> タスク作成
 				</h1>
 
 				<div class="row">
 					<div class="col-md-12 col-xl-12">
 						<form action="addTask" method="post" class="addTaskButton">
+						<input type="hidden" name="id" value="" class="formTaskId" />
 
 							<!--タイトル text-->
 							<div class="form-group">
@@ -61,7 +62,6 @@
 								<input type="text" name="title" id="formTitle"
 									class="form-control"
 									value="<c:out value="${editTask.title}" default="" />" />
-
 							</div>
 
 							<!-- 説明 textarea -->
@@ -120,7 +120,7 @@
 							<div class="form-group" style="margin-top: 10px;">
 								<!-- <div class="text-left"> -->
 								<input type="submit" class="btn btn-primary addButton"value="追加" />
-									<a href="/main" class="clearButton btn btn-secondary">クリア</a>
+									<a href="main" class="clearButton btn btn-secondary">クリア</a>
 
 
 								<!-- </div> -->
@@ -260,6 +260,10 @@
 									$(".clearButton").text("編集をやめる");
 									$(".addTaskButton").attr("action","editTask");
 									$(".addTaskButton").attr("method","post");
+
+									const FormTaskId = $(location).attr('search').substr(4, 8);
+									$(".formTaskId").attr("value",FormTaskId);
+
 
 
 									//action="addTask" method="post"

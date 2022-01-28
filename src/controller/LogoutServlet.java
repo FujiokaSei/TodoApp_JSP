@@ -18,11 +18,10 @@ public class LogoutServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		request.setAttribute("message", "ログアウトしました");
 		request.getSession().invalidate();
-		request.getRequestDispatcher("/WEB-INF/view/logoutDone.jsp")
-				.forward(request, response);
+		response.sendRedirect("login");
 	}
-
-
 }
