@@ -82,7 +82,7 @@ public class EditTaskServlet extends HttpServlet {
 			List<Priority> priorityList = priorityDao.findAll();
 
 			request.setAttribute("priorityList", priorityList);
-
+			Integer taskId = Integer.parseInt(request.getParameter("id"));
 			String title = request.getParameter("title");
 			String detail = request.getParameter("detail");
 
@@ -94,6 +94,7 @@ public class EditTaskServlet extends HttpServlet {
 			SimpleDateFormat sdfDB = new SimpleDateFormat("y-MM-dd HH:mm");
 			Date timeLimit = null;
 
+			//TODO:↓このnowSdfは必要？？mainServletで同じことしている。
 			//JSPにフォワードするためのsdfフォーマット
 			SimpleDateFormat sdf = new SimpleDateFormat("y-MM-dd'T'HH:mm");
 			Date now = new Date();
@@ -144,14 +145,15 @@ public class EditTaskServlet extends HttpServlet {
 
 			//DBへデータを追加する
 			Task task = new Task();
+			task.setId(taskId);//idを格納する。
 			task.setTitle(title);
 			task.setDetail(detail);
-			task.setAddingTime(timeLimit);
+			//task.setAddingTime(timeLimit);
 			task.setTimeLimit(timeLimit);
-			task.setUserId(1);
-			task.setTaskTypeId(taskTypeId);
+			//task.setUserId(1);
+			//task.setTaskTypeId(taskTypeId);
 			task.setPriorityId(priorityId);
-			taskDao.insert(task);
+			taskDao.update(task);
 
 			System.out.println("title:" + title);
 			System.out.println("detail:" + detail);
@@ -160,10 +162,11 @@ public class EditTaskServlet extends HttpServlet {
 			System.out.println("timeLimit:" + timeLimitStr);
 			System.out.println("nowSdf:" + nowSdf);
 
-			System.out.println("insertしました");
+			System.out.println("updateしました");
 
-			request.getRequestDispatcher("/main")
-					.forward(request, response);
+			/*			request.getRequestDispatcher("/main")
+								.forward(request, response);*/
+			response.sendRedirect("main");
 
 		} catch (Exception e) {
 			throw new ServletException(e);

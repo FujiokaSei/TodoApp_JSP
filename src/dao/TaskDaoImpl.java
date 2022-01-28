@@ -74,8 +74,19 @@ public class TaskDaoImpl implements TaskDao {
 
 	@Override
 	public void update(Task task) throws Exception {
-		// TODO 自動生成されたメソッド・スタブ
+		try (Connection con = ds.getConnection()) {
+			String sql = "UPDATE tasks SET title=?, detail=?, time_limit=?, priority_id=? WHERE id=?;";
+			PreparedStatement stmt = con.prepareStatement(sql);
+			stmt.setString(1, task.getTitle());
+			stmt.setString(2, task.getDetail());
+			stmt.setObject(3, task.getTimeLimit(), Types.DATE);
+			stmt.setObject(4, task.getPriorityId(), Types.INTEGER);
+			stmt.setObject(5, task.getId(), Types.INTEGER);
 
+			stmt.executeUpdate();
+		} catch (Exception e) {
+			throw e;
+		}
 	}
 
 	@Override
