@@ -103,7 +103,7 @@ public class TaskDaoImpl implements TaskDao {
 	}
 
 	@Override
-	public List<Task> findNotDone() throws Exception {
+	public List<Task> findDoing() throws Exception {
 		List<Task> taskList = new ArrayList<>();
 		try (Connection con = ds.getConnection()) {
 			String sql = "SELECT * FROM task_board.tasks "

@@ -8,7 +8,7 @@ public interface TaskDao {
 
 	List<Task> findAll() throws Exception;
 
-	List<Task> findNotDone() throws Exception;
+	List<Task> findDoing() throws Exception;
 
 	Task findById(Integer id) throws Exception;
 

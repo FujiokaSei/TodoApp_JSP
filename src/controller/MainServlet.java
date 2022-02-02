@@ -35,7 +35,7 @@ public class MainServlet extends HttpServlet {
 			TaskDao taskDao = DaoFactory.createTaskDao();
 			TaskTypeDao taskTypeDao = DaoFactory.createTaskTypeDao();
 			PriorityDao priorityDao = DaoFactory.createPriorityDao();
-			List<Task> taskList = taskDao.findNotDone();
+			List<Task> taskList = taskDao.findDoing();
 			List<TaskType> taskTypeList = taskTypeDao.findAll();
 			List<Priority> priorityList = priorityDao.findAll();
 
@@ -123,7 +123,7 @@ public class MainServlet extends HttpServlet {
 			TaskDao taskDao = DaoFactory.createTaskDao();
 			TaskTypeDao taskTypeDao = DaoFactory.createTaskTypeDao();
 			PriorityDao priorityDao = DaoFactory.createPriorityDao();
-			List<Task> taskList = taskDao.findNotDone();
+			List<Task> taskList = taskDao.findDoing();
 			List<TaskType> taskTypeList = taskTypeDao.findAll();
 			List<Priority> priorityList = priorityDao.findAll();
 
