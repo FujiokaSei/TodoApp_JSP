@@ -4,6 +4,32 @@ body {
 	padding-top: 70px;
 }
 
+.headerPriority1 {
+	background-color: #F1F5F9;
+}
+
+.bodyPriority1 {
+	background-color: #F8FAFC;
+}
+
+.headerPriority2 {
+	background-color: #FEF9C3;
+}
+
+.bodyPriority2 {
+	background-color: #FEFCE8;
+}
+
+.headerPriority3 {
+	background-color: #FEE2E2;
+}
+
+.bodyPriority3 {
+	background-color: #FEF2F2;
+}
+
+
+
 .error-message {
 	display: none;
 }
@@ -12,14 +38,14 @@ p {
 
 }
 
-#title{
-	font-size:16px;
+#title {
+	font-size: 16px;
 }
+
 #detail #timeLimit {
-	font-size:12.8px;
+	font-size: 12.8px;
 }
 
-h1{
-	margin-bottom:30px;
+h1 {
+	margin-bottom: 30px;
 }
-

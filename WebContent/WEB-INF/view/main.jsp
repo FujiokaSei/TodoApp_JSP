@@ -9,7 +9,7 @@
 <link href="css/ress.css" rel="stylesheet" />
 <link href="css/bootstrap.min.css" rel="stylesheet" />
 <link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" />
 <link href="css/style.css" rel="stylesheet" />
 <title>addTask</title>
 </head>
@@ -48,7 +48,7 @@
 				<div class="row">
 					<div class="col-md-12 col-xl-12">
 						<form action="addTask" method="post" class="addTaskButton">
-						<input type="hidden" name="id" value="" class="formTaskId" />
+							<input type="hidden" name="id" value="" class="formTaskId" />
 
 							<!--タイトル text-->
 							<div class="form-group">
@@ -119,8 +119,9 @@
 
 							<div class="form-group" style="margin-top: 10px;">
 								<!-- <div class="text-left"> -->
-								<input type="submit" class="btn btn-primary addButton"value="追加" />
-									<a href="main" class="clearButton btn btn-secondary">クリア</a>
+								<input type="submit" class="btn btn-primary addButton"
+									value="追加" /> <a href="main"
+									class="clearButton btn btn-secondary">クリア</a>
 
 
 								<!-- </div> -->
@@ -141,7 +142,8 @@
 
 				<c:forEach items="${taskList}" var="task" varStatus="count">
 					<div class="card bg-light mb-3">
-						<div class="card-header">
+						<div class="card-header headerPriority${task.priorityId}">
+
 							<div class="row">
 								<div class="col-9" id="title">
 									<b><c:out value="${task.title}" /></b>
@@ -153,7 +155,7 @@
 											<td id="edit">
 												<form action="/editTask" method="get" id="editButton">
 													<a href="editTask?id=<c:out value="${task.id}" />"
-													class="btn btn-success btn-sm" id="editDelete">編集</a>
+														class="btn btn-success btn-sm" id="editDelete">編集</a>
 												</form>
 											</td>
 											<td>
@@ -168,7 +170,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="card-body">
+						<div class="card-body bodyPriority${task.priorityId}">
 							<!-- <h5 class="card-title">Light card title</h5> -->
 							<div class="row" id="timeLimit">
 								<p class="" id="${count.index}">
@@ -201,7 +203,6 @@
 							</div>
 
 						</div>
-						<p></p>
 					</div>
 				</c:forEach>
 			</div>
@@ -211,29 +212,34 @@
 				<h1 class="border-bottom" style="padding: 10px;">
 					<i class="bi bi-graph-up "></i> データ
 				</h1>
-				<div class="">
+				<table class="table table-borderd">
+					<tr>
+						<th>全タスク</th>
+						<td><c:out value="${allCount}" />件</td>
+					</tr>
+					<tr>
+						<th>残タスク</th>
+						<td><c:out value="${notDoneCount}" />件</td>
+					</tr>
+					<tr>
+						<th>完了済みタスク</th>
+						<td><c:out value="${doneCount}" />件</td>
+					</tr>
+					<tr>
+						<th>完遂率</th>
+						<td><c:out value="${completingRate}" />%</td>
+					</tr>
+				</table>
 
-					<table class="table table-borderd">
-						<tr>
-							<th>全タスク</th>
-							<td><c:out value="${allCount}" />件</td>
-						</tr>
-						<tr>
-							<th>残タスク</th>
-							<td><c:out value="${notDoneCount}" />件</td>
-						</tr>
-						<tr>
-							<th>完了済みタスク</th>
-							<td><c:out value="${doneCount}" />件</td>
-						</tr>
-						<tr>
-							<th>完遂率</th>
-							<td><c:out value="${completingRate}" />%</td>
-						</tr>
-					</table>
+				<div class="btn-group btn-group-toggle" data-toggle="buttons">
+					<label class="btn btn-secondary active"> <input
+						type="radio" name="sortMethod" value="2" id="priorityOrder" autocomplete="off"
+						checked> 優先度順
+					</label> <label class="btn btn-secondary"> <input type="radio"
+						name="sortMethod" value="2" id="timeLimitOrder" autocomplete="off"> 期限順
+					</label>
 				</div>
 			</div>
-
 		</div>
 	</div>
 
@@ -250,26 +256,22 @@
 			});
 
 			//ページ更新・読み込み時に動作する
-			$(document)
-					.ready(
-							function() {
-								//URLを読み取り、編集モードに切り替える
-								if (location.pathname == "/TaskBoard/editTask") {
-									$(".addButton").attr("value", "更新");
-									$(".clearButton").attr("value", "編集をやめる");
-									$(".clearButton").text("編集をやめる");
-									$(".addTaskButton").attr("action","editTask");
-									$(".addTaskButton").attr("method","post");
+			$(document).ready(function() {
+				//URLを読み取り、編集モードに切り替える
+				if (location.pathname == "/TaskBoard/editTask") {
+					$(".addButton").attr("value", "更新");
+					$(".clearButton").attr("value", "編集をやめる");
+					$(".clearButton").text("編集をやめる");
+					$(".addTaskButton").attr("action", "editTask");
+					$(".addTaskButton").attr("method", "post");
 
-									const FormTaskId = $(location).attr('search').substr(4, 8);
-									$(".formTaskId").attr("value",FormTaskId);
+					const FormTaskId = $(location).attr('search').substr(4, 8);
+					$(".formTaskId").attr("value", FormTaskId);
 
-
-
-									//action="addTask" method="post"
-								} else {
-								}
-							});
+					//action="addTask" method="post"
+				} else {
+				}
+			});
 
 			/* //優先度の初期値を設定する
 			const priorityId = $(location).attr('search').substr(4, 5);
