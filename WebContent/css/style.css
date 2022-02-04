@@ -28,7 +28,11 @@ body {
 	background-color: #FEF2F2;
 }
 
-
+.orderButton {
+	padding: 0;
+	border: 0;
+	display: inline;
+}
 
 .error-message {
 	display: none;
