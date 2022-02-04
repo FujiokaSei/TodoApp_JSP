@@ -2,6 +2,7 @@ package controller;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -10,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dao.DaoFactory;
 import dao.PriorityDao;
@@ -35,9 +37,37 @@ public class MainServlet extends HttpServlet {
 			TaskDao taskDao = DaoFactory.createTaskDao();
 			TaskTypeDao taskTypeDao = DaoFactory.createTaskTypeDao();
 			PriorityDao priorityDao = DaoFactory.createPriorityDao();
-			List<Task> taskList = taskDao.findDoing();
 			List<TaskType> taskTypeList = taskTypeDao.findAll();
 			List<Priority> priorityList = priorityDao.findAll();
+			List<Task> taskList = new ArrayList<>();
+
+			HttpSession session = request.getSession();
+			String orderId = request.getParameter("order");
+
+			if (orderId != null) {//nullではない場合
+				if (orderId.equals("2")) {//orderIdがあれば、sessionに格納する
+					session.setAttribute("orderId", "2");
+					taskList = taskDao.findDoingPriorityOrder();
+				} else if (orderId.equals("1")) {
+					session.setAttribute("orderId", "1");
+					taskList = taskDao.findDoingDeadlineOrder();
+				} else {//1,2以外の値の場合、何もしない
+				}
+			}
+
+			else {//nullの場合、デフォルトのidを取り出す。
+				orderId = (String) session.getAttribute("orderId");
+
+				if (orderId.equals("2")) {
+					taskList = taskDao.findDoingPriorityOrder();
+				} else if (orderId.equals("1")) {
+					taskList = taskDao.findDoingDeadlineOrder();
+				} else {
+					taskDao.findDoingDeadlineOrder();
+				}
+			}
+			orderId = (String) session.getAttribute("orderId");
+			request.setAttribute("orderId", orderId);
 
 			/*統計のデータの処理を入れる
 			 *
@@ -48,7 +78,6 @@ public class MainServlet extends HttpServlet {
 			Integer doneCount = taskDao.findDoneCount();
 			Integer notDoneCount = allCount - doneCount;
 			Double completingRate = Math.floor((double) doneCount / allCount * 100);
-
 
 			SimpleDateFormat sdf = new SimpleDateFormat("y-MM-dd'T'HH:mm");
 			Date now = new Date();
@@ -69,7 +98,9 @@ public class MainServlet extends HttpServlet {
 			System.out.println("doGet");
 		}
 
-		catch (Exception e) {
+		catch (
+
+		Exception e) {
 			throw new ServletException(e);
 		}
 
@@ -87,45 +118,39 @@ public class MainServlet extends HttpServlet {
 		 *
 		 * TODO:③main.jspにフォワードする
 		 * */
-
-		//		try {
-		//			TaskDao taskDao = DaoFactory.createTaskDao();
-		//			TaskTypeDao taskTypeDao = DaoFactory.createTaskTypeDao();
-		//			List<Task> taskList = taskDao.findAll();
-		//			List<TaskType> taskTypeList = taskTypeDao.findAll();
-		//
-		//			/*統計のデータの処理を入れる
-		//			 *
-		//			 *
-		//			 * */
-		//			//findAllCount()のテスト
-		//			Integer num = taskDao.findAllCount();
-		//
-		//			SimpleDateFormat sdf = new SimpleDateFormat("y-MM-dd'T'HH:mm");
-		//			Date now = new Date();
-		//			String nowSdf = sdf.format(now);
-		//
-		//			request.setAttribute("now", nowSdf);
-		//			request.setAttribute("taskList", taskList);
-		//			request.setAttribute("taskTypeList", taskTypeList);
-		//
-		//			request.getRequestDispatcher("WEB-INF/view/main.jsp")
-		//					.forward(request, response);
-		//
-		//
-		//			System.out.println("doPOST");
-		//
-		//		} catch (Exception e) {
-		//			throw new ServletException(e);
-		//		}
-
 		try {
 			TaskDao taskDao = DaoFactory.createTaskDao();
 			TaskTypeDao taskTypeDao = DaoFactory.createTaskTypeDao();
 			PriorityDao priorityDao = DaoFactory.createPriorityDao();
-			List<Task> taskList = taskDao.findDoing();
 			List<TaskType> taskTypeList = taskTypeDao.findAll();
 			List<Priority> priorityList = priorityDao.findAll();
+			List<Task> taskList = new ArrayList<>();
+
+			HttpSession session = request.getSession();
+			String orderId = request.getParameter("order");
+
+			if (orderId != null) {//nullではない場合
+				if (orderId.equals("2")) {//orderIdがあれば、sessionに格納する
+					session.setAttribute("orderId", "2");
+					taskList = taskDao.findDoingPriorityOrder();
+				} else if (orderId.equals("1")) {
+					session.setAttribute("orderId", "1");
+					taskList = taskDao.findDoingDeadlineOrder();
+				} else {//1,2以外の値の場合、何もしない
+				}
+			}
+
+			else {//nullの場合、デフォルトのidを取り出す。
+				orderId = (String) session.getAttribute("orderId");
+
+				if (orderId.equals("2")) {
+					taskList = taskDao.findDoingPriorityOrder();
+				} else if (orderId.equals("1")) {
+					taskList = taskDao.findDoingDeadlineOrder();
+				} else {
+					taskDao.findDoingDeadlineOrder();
+				}
+			}
 
 			/*統計のデータの処理を入れる
 			 *
@@ -156,7 +181,9 @@ public class MainServlet extends HttpServlet {
 			System.out.println("doGet");
 		}
 
-		catch (Exception e) {
+		catch (
+
+		Exception e) {
 			throw new ServletException(e);
 		}
 

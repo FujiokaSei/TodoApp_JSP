@@ -74,6 +74,8 @@ public class LoginServlet extends HttpServlet {
 			if (user != null) {
 				request.getSession().setAttribute("userName", user.getName());
 				request.getSession().setAttribute("status", "login");
+				request.getSession().setAttribute("orderId", "1");
+
 				response.sendRedirect("main");
 			} else {
 				request.setAttribute("error", true);

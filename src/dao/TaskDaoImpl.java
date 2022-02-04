@@ -103,12 +103,30 @@ public class TaskDaoImpl implements TaskDao {
 	}
 
 	@Override
-	public List<Task> findDoing() throws Exception {
+	public List<Task> findDoingDeadlineOrder() throws Exception {
 		List<Task> taskList = new ArrayList<>();
 		try (Connection con = ds.getConnection()) {
 			String sql = "SELECT * FROM task_board.tasks "
 					+ "WHERE(task_type_id <> 3) "
 					+ "ORDER BY time_limit ASC, priority_id DESC;";
+			PreparedStatement stmt = con.prepareStatement(sql);
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {
+				taskList.add(mapToTask(rs));
+			}
+		} catch (Exception e) {
+			throw e;
+		}
+		return taskList;
+	}
+
+	@Override
+	public List<Task> findDoingPriorityOrder() throws Exception {
+		List<Task> taskList = new ArrayList<>();
+		try (Connection con = ds.getConnection()) {
+			String sql = "SELECT * FROM task_board.tasks "
+					+ "WHERE(task_type_id <> 3) "
+					+ "ORDER BY priority_id DESC, time_limit ASC;";
 			PreparedStatement stmt = con.prepareStatement(sql);
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {

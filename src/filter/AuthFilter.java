@@ -42,6 +42,11 @@ public class AuthFilter implements Filter {
 		HttpServletResponse res = (HttpServletResponse) response;
 		HttpSession session = req.getSession();
 
+		if (session.getAttribute("orderId") == null) {
+			session.setAttribute("orderId", "2");
+		}
+
+		//"taskBoard/hogehoge"など異なるURLにアクセスしようとした場合にlogin画面に遷移させる。
 		String uri = req.getRequestURI();
 		if (!uri.endsWith("/login") &&
 				!uri.contains("/css/") &&
@@ -52,7 +57,7 @@ public class AuthFilter implements Filter {
 				return;
 			}
 		}
-	    chain.doFilter(request, response);
+		chain.doFilter(request, response);
 	}
 
 	/**

@@ -231,14 +231,21 @@
 					</tr>
 				</table>
 
-				<div class="btn-group btn-group-toggle" data-toggle="buttons">
-					<label class="btn btn-secondary active"> <input
-						type="radio" name="sortMethod" value="2" id="priorityOrder" autocomplete="off"
-						checked> 優先度順
-					</label> <label class="btn btn-secondary"> <input type="radio"
-						name="sortMethod" value="2" id="timeLimitOrder" autocomplete="off"> 期限順
-					</label>
-				</div>
+				<form action="/main" method="get">
+					<ul class="list-group list-group-horizontal">
+						<li class="list-group-item orderButton ">
+							<button type="button" class="btn btn-outline-secondary w-50"
+								onclick="location.href='main?order=1'">期限順</button>
+						</li>
+
+
+						<li class="list-group-item orderButton ">
+							<button type="button" class="btn btn-outline-secondary w-50"
+								onclick="location.href='main?order=2'">優先度順</button>
+						</li>
+					</ul>
+
+				</form>
 			</div>
 		</div>
 	</div>
