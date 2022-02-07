@@ -228,8 +228,9 @@
 
 	<script src="js/jquery-3.1.1.min.js"></script>
 	<script src="js/bootstrap.bundle.min.js"></script>
+	<script type="text/javascript" src="js/main.js"></script>
 
-	<script>
+<!-- 	<script>
 		$(function() {
 			//crearボタン押下時に動作する
 			$('#clear').click(function() {
@@ -253,7 +254,7 @@
 				}
 			});
 		});
-	</script>
+	</script> -->
 
 </body>
 </html>
