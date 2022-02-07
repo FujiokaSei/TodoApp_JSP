@@ -21,32 +21,24 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public List<User> findAll() throws Exception {
-		// TODO 自動生成されたメソッド・スタブ
 		return null;
 	}
 
 	@Override
 	public User findById(Integer id) throws Exception {
-		// TODO 自動生成されたメソッド・スタブ
 		return null;
 	}
 
 	@Override
 	public void insert(User user) throws Exception {
-		// TODO 自動生成されたメソッド・スタブ
-
 	}
 
 	@Override
 	public void update(User user) throws Exception {
-		// TODO 自動生成されたメソッド・スタブ
-
 	}
 
 	@Override
 	public void delete(User user) throws Exception {
-		// TODO 自動生成されたメソッド・スタブ
-
 	}
 
 	public User findByLoginIdAndLoginPass(String loginId, String loginPass)

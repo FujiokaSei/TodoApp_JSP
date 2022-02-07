@@ -27,15 +27,6 @@ public class AddTaskServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		/*
-		 * ①データを受け取る
-		 *
-		 * ②データをセットする
-		 *
-		 * ③MainServletにフォワードする。
-		 *
-		 * */
-
 		try {
 			TaskDao taskDao = DaoFactory.createTaskDao();
 			//			TaskTypeDao taskTypeDao = DaoFactory.createTaskTypeDao();
@@ -49,8 +40,6 @@ public class AddTaskServlet extends HttpServlet {
 			String title = request.getParameter("title");
 			String detail = request.getParameter("detail");
 
-			//↓暫定対応↓後で修正する。
-			//Integer taskTypeId = Integer.parseInt(request.getParameter("taskTypeId"));
 			Integer taskTypeId = 1;
 			Integer priorityId = Integer.parseInt(request.getParameter("priorityId"));
 			String timeLimitStr = request.getParameter("timeLimit");

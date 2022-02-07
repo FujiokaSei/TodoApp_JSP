@@ -171,7 +171,6 @@ public class TaskDaoImpl implements TaskDao {
 
 	@Override
 	public Integer findNotDoneCount() throws Exception {
-		// TODO 自動生成されたメソッド・スタブ
 		return null;
 	}
 

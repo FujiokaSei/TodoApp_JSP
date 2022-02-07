@@ -55,20 +55,14 @@ public class TaskTypeDaoImpl implements TaskTypeDao {
 
 	@Override
 	public void insert(TaskType task) throws Exception {
-		// TODO 自動生成されたメソッド・スタブ
-
 	}
 
 	@Override
 	public void update(TaskType task) throws Exception {
-		// TODO 自動生成されたメソッド・スタブ
-
 	}
 
 	@Override
 	public void delete(TaskType task) throws Exception {
-		// TODO 自動生成されたメソッド・スタブ
-
 	}
 
 	protected TaskType mapToTaskType(ResultSet rs) throws Exception {

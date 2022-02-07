@@ -16,7 +16,6 @@ public class PriorityDaoImpl implements PriorityDao {
 
 	public PriorityDaoImpl(DataSource ds) {
 		this.ds = ds;
-		// TODO 自動生成されたコンストラクター・スタブ
 	}
 
 	@Override
@@ -38,26 +37,20 @@ public class PriorityDaoImpl implements PriorityDao {
 
 	@Override
 	public Priority findById(Integer id) throws Exception {
-		// TODO 自動生成されたメソッド・スタブ
 		return null;
 	}
 
 	@Override
 	public void insert(Priority priority) throws Exception {
-		// TODO 自動生成されたメソッド・スタブ
 
 	}
 
 	@Override
 	public void update(Priority priority) throws Exception {
-		// TODO 自動生成されたメソッド・スタブ
-
 	}
 
 	@Override
 	public void delete(Priority priority) throws Exception {
-		// TODO 自動生成されたメソッド・スタブ
-
 	}
 
 	protected Priority mapToPriority(ResultSet rs) throws Exception {
@@ -65,7 +58,5 @@ public class PriorityDaoImpl implements PriorityDao {
 		priority.setId(rs.getInt("id"));
 		priority.setName(rs.getString("name"));
 		return priority;
-
 	}
-
 }

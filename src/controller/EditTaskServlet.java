@@ -17,16 +17,10 @@ import dao.TaskDao;
 import domain.Priority;
 import domain.Task;
 
-/**
- * Servlet implementation class EditTaskServlet
- */
 @WebServlet("/editTask")
 public class EditTaskServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -52,26 +46,13 @@ public class EditTaskServlet extends HttpServlet {
 					.forward(request, response);
 
 		} catch (Exception e) {
-			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
 		}
 
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		/*
-		 * ①データを受け取る
-		 *
-		 * ②データをセットする
-		 *
-		 * ③MainServletにフォワードする。
-		 *
-		 * */
-
 		try {
 			//宣言部
 			TaskDao taskDao = DaoFactory.createTaskDao();
@@ -94,7 +75,6 @@ public class EditTaskServlet extends HttpServlet {
 			SimpleDateFormat sdfDB = new SimpleDateFormat("y-MM-dd HH:mm");
 			Date timeLimit = null;
 
-			//TODO:↓このnowSdfは必要？？mainServletで同じことしている。
 			//JSPにフォワードするためのsdfフォーマット
 			SimpleDateFormat sdf = new SimpleDateFormat("y-MM-dd'T'HH:mm");
 			Date now = new Date();
@@ -148,10 +128,7 @@ public class EditTaskServlet extends HttpServlet {
 			task.setId(taskId);//idを格納する。
 			task.setTitle(title);
 			task.setDetail(detail);
-			//task.setAddingTime(timeLimit);
 			task.setTimeLimit(timeLimit);
-			//task.setUserId(1);
-			//task.setTaskTypeId(taskTypeId);
 			task.setPriorityId(priorityId);
 			taskDao.update(task);
 
@@ -163,9 +140,6 @@ public class EditTaskServlet extends HttpServlet {
 			System.out.println("nowSdf:" + nowSdf);
 
 			System.out.println("updateしました");
-
-			/*			request.getRequestDispatcher("/main")
-								.forward(request, response);*/
 			response.sendRedirect("main");
 
 		} catch (Exception e) {

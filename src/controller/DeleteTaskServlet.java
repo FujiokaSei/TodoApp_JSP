@@ -12,17 +12,12 @@ import dao.DaoFactory;
 import dao.TaskDao;
 import domain.Task;
 
-/**
- * Servlet implementation class DeleteTaskServlet
- */
 @WebServlet("/deleteTask")
 public class DeleteTaskServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-
 		try {
 			String strId = request.getParameter("id");
 			Task task = new Task();
@@ -40,7 +35,6 @@ public class DeleteTaskServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 
