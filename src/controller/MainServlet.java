@@ -21,16 +21,10 @@ import domain.Priority;
 import domain.Task;
 import domain.TaskType;
 
-/**
- * Servlet implementation class AddTaskServlet
- */
 @WebServlet("/main")
 public class MainServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		try {
@@ -48,9 +42,11 @@ public class MainServlet extends HttpServlet {
 				if (orderId.equals("2")) {//orderIdがあれば、sessionに格納する
 					session.setAttribute("orderId", "2");
 					taskList = taskDao.findDoingPriorityOrder();
+					request.setAttribute("selectedOrderId", "2");
 				} else if (orderId.equals("1")) {
 					session.setAttribute("orderId", "1");
 					taskList = taskDao.findDoingDeadlineOrder();
+					request.setAttribute("selectedOrderId", "1");
 				} else {//1,2以外の値の場合、何もしない
 				}
 			}
@@ -60,20 +56,20 @@ public class MainServlet extends HttpServlet {
 
 				if (orderId.equals("2")) {
 					taskList = taskDao.findDoingPriorityOrder();
+					request.setAttribute("selectedOrderId", "2");
 				} else if (orderId.equals("1")) {
 					taskList = taskDao.findDoingDeadlineOrder();
+					request.setAttribute("selectedOrderId", "1");
+
 				} else {
 					taskDao.findDoingDeadlineOrder();
+					request.setAttribute("selectedOrderId", "1");
+
 				}
 			}
 			orderId = (String) session.getAttribute("orderId");
 			request.setAttribute("orderId", orderId);
 
-			/*統計のデータの処理を入れる
-			 *
-			 *
-			 * */
-			//findAllCount()のテスト
 			Integer allCount = taskDao.findAllCount();
 			Integer doneCount = taskDao.findDoneCount();
 			Integer notDoneCount = allCount - doneCount;
@@ -111,13 +107,7 @@ public class MainServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		/*
-		 * TODO:①データを受け取る
-		 *
-		 * TODO:②データをセットする
-		 *
-		 * TODO:③main.jspにフォワードする
-		 * */
+
 		try {
 			TaskDao taskDao = DaoFactory.createTaskDao();
 			TaskTypeDao taskTypeDao = DaoFactory.createTaskTypeDao();
@@ -133,9 +123,11 @@ public class MainServlet extends HttpServlet {
 				if (orderId.equals("2")) {//orderIdがあれば、sessionに格納する
 					session.setAttribute("orderId", "2");
 					taskList = taskDao.findDoingPriorityOrder();
+					request.setAttribute("selectedOrderId", "2");
 				} else if (orderId.equals("1")) {
 					session.setAttribute("orderId", "1");
 					taskList = taskDao.findDoingDeadlineOrder();
+					request.setAttribute("selectedOrderId", "1");
 				} else {//1,2以外の値の場合、何もしない
 				}
 			}
@@ -145,17 +137,20 @@ public class MainServlet extends HttpServlet {
 
 				if (orderId.equals("2")) {
 					taskList = taskDao.findDoingPriorityOrder();
+					request.setAttribute("selectedOrderId", "2");
 				} else if (orderId.equals("1")) {
 					taskList = taskDao.findDoingDeadlineOrder();
+					request.setAttribute("selectedOrderId", "1");
+
 				} else {
 					taskDao.findDoingDeadlineOrder();
+					request.setAttribute("selectedOrderId", "1");
+
 				}
 			}
+			orderId = (String) session.getAttribute("orderId");
+			request.setAttribute("orderId", orderId);
 
-			/*統計のデータの処理を入れる
-			 *
-			 *
-			 * */
 			//findAllCount()のテスト
 			Integer allCount = taskDao.findAllCount();
 			Integer doneCount = taskDao.findDoneCount();
@@ -186,7 +181,6 @@ public class MainServlet extends HttpServlet {
 		Exception e) {
 			throw new ServletException(e);
 		}
-
 	}
 
 }

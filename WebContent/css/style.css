@@ -1,5 +1,13 @@
 @charset "utf-8";
 
+.header{
+	width:100%;
+}
+
+.logoutButton{
+	text-align:right;
+}
+
 body {
 	padding-top: 70px;
 }
