@@ -90,24 +90,16 @@ public class MainServlet extends HttpServlet {
 
 			request.getRequestDispatcher("WEB-INF/view/main.jsp")
 					.forward(request, response);
-
-			System.out.println("doGet");
 		}
 
 		catch (
-
 		Exception e) {
 			throw new ServletException(e);
 		}
-
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
 		try {
 			TaskDao taskDao = DaoFactory.createTaskDao();
 			TaskTypeDao taskTypeDao = DaoFactory.createTaskTypeDao();
@@ -172,15 +164,11 @@ public class MainServlet extends HttpServlet {
 
 			request.getRequestDispatcher("WEB-INF/view/main.jsp")
 					.forward(request, response);
-
-			System.out.println("doGet");
 		}
 
 		catch (
-
 		Exception e) {
 			throw new ServletException(e);
 		}
 	}
-
 }

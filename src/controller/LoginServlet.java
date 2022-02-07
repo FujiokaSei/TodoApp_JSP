@@ -19,23 +19,17 @@ public class LoginServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
 		HttpSession session = request.getSession();
 		String status = "";
 
 		//nullの場合：statusに格納しない。
 		if (session != null || session.getAttribute("status") != null) {
 			status = (String) session.getAttribute("status");
-			System.out.println(status);
 			//if文。logoutのメッセージの有無で処理を分ける
 			if (status == "login") {
-				//logoutした場合
 				request.setAttribute("message", "ログアウトしました");
 			}
 		}
-
-		System.out.println("受け取りました。");
-
 		request.getSession().invalidate();
 		request.getRequestDispatcher("WEB-INF/view/login.jsp")
 				.forward(request, response);
@@ -46,7 +40,6 @@ public class LoginServlet extends HttpServlet {
 		try {
 			String loginId = request.getParameter("loginId");
 			String loginPass = request.getParameter("loginPass");
-
 			request.setAttribute("loginId", loginId);
 
 			// バリデーション
@@ -83,5 +76,4 @@ public class LoginServlet extends HttpServlet {
 			throw new ServletException(e);
 		}
 	}
-
 }

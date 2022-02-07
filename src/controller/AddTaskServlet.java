@@ -17,9 +17,6 @@ import dao.TaskDao;
 import domain.Priority;
 import domain.Task;
 
-/**
- * Servlet implementation class AddTaskServlet
- */
 @WebServlet("/addTask")
 public class AddTaskServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -90,7 +87,6 @@ public class AddTaskServlet extends HttpServlet {
 				request.setAttribute("timeLimit", timeLimitStr);
 				request.setAttribute("now", nowSdf);
 				request.setAttribute("priorityList", priorityList);
-
 				request.getRequestDispatcher("/main")
 						.forward(request, response);
 				return;
@@ -107,22 +103,11 @@ public class AddTaskServlet extends HttpServlet {
 			task.setPriorityId(priorityId);
 			taskDao.insert(task);
 
-			System.out.println("title:" + title);
-			System.out.println("detail:" + detail);
-			System.out.println("taskType:" + taskTypeId);
-			System.out.println("priorityId:" + priorityId);
-			System.out.println("timeLimit:" + timeLimitStr);
-			System.out.println("nowSdf:" + nowSdf);
-
-			System.out.println("insertしました");
-
 			request.getRequestDispatcher("/main")
 					.forward(request, response);
 
 		} catch (Exception e) {
 			throw new ServletException(e);
 		}
-
 	}
-
 }

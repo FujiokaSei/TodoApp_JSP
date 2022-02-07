@@ -35,23 +35,23 @@ public class PriorityDaoImpl implements PriorityDao {
 		return priorityList;
 	}
 
-	@Override
-	public Priority findById(Integer id) throws Exception {
-		return null;
-	}
+	/*	@Override
+		public Priority findById(Integer id) throws Exception {
+			return null;
+		}
 
-	@Override
-	public void insert(Priority priority) throws Exception {
+		@Override
+		public void insert(Priority priority) throws Exception {
 
-	}
+		}
 
-	@Override
-	public void update(Priority priority) throws Exception {
-	}
+		@Override
+		public void update(Priority priority) throws Exception {
+		}
 
-	@Override
-	public void delete(Priority priority) throws Exception {
-	}
+		@Override
+		public void delete(Priority priority) throws Exception {
+		}*/
 
 	protected Priority mapToPriority(ResultSet rs) throws Exception {
 		Priority priority = new Priority();

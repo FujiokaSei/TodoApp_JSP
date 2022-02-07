@@ -22,7 +22,6 @@ public class CompleteTaskServlet extends HttpServlet {
 			task.setId(Integer.parseInt(strId));
 			TaskDao taskDao = DaoFactory.createTaskDao();
 			taskDao.complete(task);
-
 			request.getRequestDispatcher("/main")
 					.forward(request, response);
 
@@ -30,10 +29,4 @@ public class CompleteTaskServlet extends HttpServlet {
 			throw new ServletException(e);
 		}
 	}
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
-
 }

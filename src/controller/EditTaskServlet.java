@@ -26,12 +26,9 @@ public class EditTaskServlet extends HttpServlet {
 
 		try {
 			Integer id = Integer.parseInt(request.getParameter("id"));
-			System.out.println("id:" + id);
-
 			TaskDao taskDao = DaoFactory.createTaskDao();
 			Task editTask = taskDao.findById(id);
 			String mode = "editMode";
-
 			Date timeLimit = editTask.getTimeLimit();
 
 			SimpleDateFormat sdf = new SimpleDateFormat("y-MM-dd'T'HH:mm");
@@ -48,7 +45,6 @@ public class EditTaskServlet extends HttpServlet {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -56,10 +52,8 @@ public class EditTaskServlet extends HttpServlet {
 		try {
 			//宣言部
 			TaskDao taskDao = DaoFactory.createTaskDao();
-			//			TaskTypeDao taskTypeDao = DaoFactory.createTaskTypeDao();
 			PriorityDao priorityDao = DaoFactory.createPriorityDao();
 			List<Task> taskList = taskDao.findAll();
-			//			List<TaskType> taskTypeList = taskTypeDao.findAll();
 			List<Priority> priorityList = priorityDao.findAll();
 
 			request.setAttribute("priorityList", priorityList);
@@ -117,7 +111,6 @@ public class EditTaskServlet extends HttpServlet {
 				request.setAttribute("timeLimit", timeLimitStr);
 				request.setAttribute("now", nowSdf);
 				request.setAttribute("priorityList", priorityList);
-
 				request.getRequestDispatcher("/main")
 						.forward(request, response);
 				return;
@@ -125,21 +118,12 @@ public class EditTaskServlet extends HttpServlet {
 
 			//DBへデータを追加する
 			Task task = new Task();
-			task.setId(taskId);//idを格納する。
+			task.setId(taskId);
 			task.setTitle(title);
 			task.setDetail(detail);
 			task.setTimeLimit(timeLimit);
 			task.setPriorityId(priorityId);
 			taskDao.update(task);
-
-			System.out.println("title:" + title);
-			System.out.println("detail:" + detail);
-			System.out.println("taskType:" + taskTypeId);
-			System.out.println("priorityId:" + priorityId);
-			System.out.println("timeLimit:" + timeLimitStr);
-			System.out.println("nowSdf:" + nowSdf);
-
-			System.out.println("updateしました");
 			response.sendRedirect("main");
 
 		} catch (Exception e) {

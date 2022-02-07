@@ -1,15 +1,19 @@
 @charset "utf-8";
 
-.header{
-	width:100%;
+.header {
+	width: 100%;
 }
 
-.logoutButton{
-	text-align:right;
+.logoutButton {
+	text-align: right;
 }
 
 body {
 	padding-top: 70px;
+}
+
+h1 {
+	margin-bottom: 30px;
 }
 
 .headerPriority1 {
@@ -46,18 +50,10 @@ body {
 	display: none;
 }
 
-p {
-
-}
-
 #title {
 	font-size: 16px;
 }
 
 #detail #timeLimit {
 	font-size: 12.8px;
-}
-
-h1 {
-	margin-bottom: 30px;
 }

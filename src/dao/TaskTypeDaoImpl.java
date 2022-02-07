@@ -53,17 +53,17 @@ public class TaskTypeDaoImpl implements TaskTypeDao {
 		return taskType;
 	}
 
-	@Override
-	public void insert(TaskType task) throws Exception {
-	}
+	/*	@Override
+		public void insert(TaskType task) throws Exception {
+		}
 
-	@Override
-	public void update(TaskType task) throws Exception {
-	}
+		@Override
+		public void update(TaskType task) throws Exception {
+		}
 
-	@Override
-	public void delete(TaskType task) throws Exception {
-	}
+		@Override
+		public void delete(TaskType task) throws Exception {
+		}*/
 
 	protected TaskType mapToTaskType(ResultSet rs) throws Exception {
 		TaskType taskType = new TaskType();

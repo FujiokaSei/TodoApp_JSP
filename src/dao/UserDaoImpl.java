@@ -3,7 +3,6 @@ package dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.List;
 
 import javax.sql.DataSource;
 
@@ -19,27 +18,27 @@ public class UserDaoImpl implements UserDao {
 		this.ds = ds;
 	}
 
-	@Override
-	public List<User> findAll() throws Exception {
+	/*	@Override
+		public List<User> findAll() throws Exception {
 		return null;
-	}
+		}
 
-	@Override
-	public User findById(Integer id) throws Exception {
+		@Override
+		public User findById(Integer id) throws Exception {
 		return null;
-	}
+		}
 
-	@Override
-	public void insert(User user) throws Exception {
-	}
+		@Override
+		public void insert(User user) throws Exception {
+		}
 
-	@Override
-	public void update(User user) throws Exception {
-	}
+		@Override
+		public void update(User user) throws Exception {
+		}
 
-	@Override
-	public void delete(User user) throws Exception {
-	}
+		@Override
+		public void delete(User user) throws Exception {
+		}*/
 
 	public User findByLoginIdAndLoginPass(String loginId, String loginPass)
 			throws Exception {
