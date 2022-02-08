@@ -34,7 +34,6 @@ public class EditTaskServlet extends HttpServlet {
 			SimpleDateFormat sdf = new SimpleDateFormat("y-MM-dd'T'HH:mm");
 			Date now = new Date();
 			String timeLimitSdf = sdf.format(timeLimit);
-			System.out.println("タイムリミット" + timeLimitSdf);
 
 			request.setAttribute("timeLimit", timeLimitSdf);
 			request.setAttribute("mode", mode);

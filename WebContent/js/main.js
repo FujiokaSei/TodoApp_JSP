@@ -8,7 +8,7 @@ $(function() {
 	//ページ更新・読み込み時に動作する
 	$(document).ready(function() {
 		//URLを読み取り、編集モードに切り替える
-		if (location.pathname == "/TaskBoard/editTask") {
+		if (location.pathname == "/TodoApp/editTask") {
 			$(".addButton").attr("value", "更新");
 			$(".clearButton").attr("value", "編集をやめる");
 			$(".clearButton").text("編集をやめる");

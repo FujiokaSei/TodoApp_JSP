@@ -152,7 +152,8 @@
 								<p class="" id="${count.index}">
 									<b>期限：</b>
 									<fmt:formatDate value="${task.timeLimit}"
-										pattern="y年M月d日 HH時mm分" />
+										pattern="y年M月d日" />
+										 <!-- HH時mm分 -->
 									<b>優先度：</b>
 									<c:forEach items="${priorityList}" var="priority">
 										<c:if test="${priority.id==task.priorityId}">
@@ -229,32 +230,6 @@
 	<script src="js/jquery-3.1.1.min.js"></script>
 	<script src="js/bootstrap.bundle.min.js"></script>
 	<script type="text/javascript" src="js/main.js"></script>
-
-<!-- 	<script>
-		$(function() {
-			//crearボタン押下時に動作する
-			$('#clear').click(function() {
-				$('#formTitle').val("");
-				$('#formDetail').val("");
-			});
-
-			//ページ更新・読み込み時に動作する
-			$(document).ready(function() {
-				//URLを読み取り、編集モードに切り替える
-				if (location.pathname == "/TaskBoard/editTask") {
-					$(".addButton").attr("value", "更新");
-					$(".clearButton").attr("value", "編集をやめる");
-					$(".clearButton").text("編集をやめる");
-					$(".addTaskButton").attr("action", "editTask");
-					$(".addTaskButton").attr("method", "post");
-
-					const FormTaskId = $(location).attr('search').substr(4, 8);
-					$(".formTaskId").attr("value", FormTaskId);
-				} else {
-				}
-			});
-		});
-	</script> -->
 
 </body>
 </html>
