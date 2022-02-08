@@ -122,11 +122,11 @@
 						<div class="card-header headerPriority${task.priorityId}">
 
 							<div class="row">
-								<div class="col-9" id="title">
+								<div class="col-10" id="title">
 									<b><c:out value="${task.title}" /></b>
 								</div>
 
-								<div class="col-3" style="padding-right: 0px;">
+								<div class="col-2" style="padding-right: 0px;">
 									<table>
 										<tr>
 											<td id="edit">
