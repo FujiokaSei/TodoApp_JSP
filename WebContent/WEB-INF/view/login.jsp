@@ -28,10 +28,9 @@
 		<div class="row">
 			<div class="col-md-offset-3 col-md-6 mx-auto">
 				<div class="panel panel-default">
-
-					<img src="images/TodoApp_logo.png" alt="logo"/>
-
-					<div class="panel-heading">Todoアプリ ログイン</div>
+					<div class="logo">
+						<img src="images/logo.png" alt="logo" title="logo"/>
+					</div>
 
 					<c:if test="${not empty message}">
 						<div class="alert alert-danger" role="alert">
