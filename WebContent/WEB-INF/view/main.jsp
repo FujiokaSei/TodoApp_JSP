@@ -97,8 +97,8 @@
 										</div>
 									</c:if>
 									<input type="datetime-local" name="timeLimit"
-										value="<c:out value="${timeLimit}"/>" id="formTimeLimit"
-										min="<c:out value="${now}"/>" class="form-control" required />
+										value="<c:out value="${timeLimit}"/>"
+										min="<c:out value="${now}"/>" class="form-control formTimeLimit" required />
 								</div>
 							</div>
 
@@ -121,24 +121,24 @@
 					<div class="card bg-light mb-3">
 						<div class="card-header headerPriority${task.priorityId}">
 
-							<div class="row">
-								<div class="col-10" id="title">
+							<div class="row ">
+								<div class="col-9" id="title">
 									<b><c:out value="${task.title}" /></b>
 								</div>
 
-								<div class="col-2" style="padding-right: 0px;">
-									<table>
+								<div class="col-3">
+									<table class="float-right">
 										<tr>
 											<td id="edit">
 												<form action="/editTask" method="get" id="editButton">
 													<a href="editTask?id=<c:out value="${task.id}" />"
-														class="btn btn-success btn-sm" id="editDelete">編集</a>
+														class="btn btn-success btn-sm editCompleteButton" id="editDelete">編集</a>
 												</form>
 											</td>
 											<td>
 												<form action="/completeTask" method="get">
 													<a href="completeTask?id=<c:out value="${task.id}" />"
-														class="btn btn-danger btn-sm">完了</a>
+														class="btn btn-danger btn-sm editCompleteButton">完了</a>
 												</form>
 											</td>
 										</tr>

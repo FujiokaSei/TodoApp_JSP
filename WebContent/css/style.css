@@ -16,6 +16,10 @@ h1 {
 	margin-bottom: 30px;
 }
 
+.formTimeLimit{
+	padding:6px 0px;
+}
+
 .card-header {
 	padding:3px 3px 3px 5px;
 }
@@ -46,6 +50,10 @@ h1 {
 
 .bodyPriority3 {
 	background-color: #FEF2F2;
+}
+
+.editCompleteButton{
+	white-space: nowrap;
 }
 
 .orderButton {
