@@ -28,7 +28,10 @@
 		<div class="row">
 			<div class="col-md-offset-3 col-md-6 mx-auto">
 				<div class="panel panel-default">
-					<div class="panel-heading">Task管理システム ログイン</div>
+
+					<img src="images/TodoApp_logo.png" alt="logo"/>
+
+					<div class="panel-heading">Todoアプリ ログイン</div>
 
 					<c:if test="${not empty message}">
 						<div class="alert alert-danger" role="alert">
@@ -64,6 +67,15 @@
 									value="ログイン" />
 							</div>
 						</form>
+
+						<div class="guestInfo">
+							<p class="guestUser">ゲストユーザー</p>
+							<p>
+								ログインID：guest<br /> パスワード：guest
+							</p>
+						</div>
+
+
 					</div>
 				</div>
 			</div>

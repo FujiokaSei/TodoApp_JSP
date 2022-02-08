@@ -1,5 +1,17 @@
 @charset "utf-8";
 
+.panel-heading{
+	text-align:center;
+}
+
+.guestInfo{
+	font-size:12.8px;
+	text-align:center;
+}
+.guestUser{
+	margin-bottom:5px;
+}
+
 .header {
 	width: 100%;
 }
