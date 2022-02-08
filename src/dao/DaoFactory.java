@@ -30,7 +30,7 @@ public class DaoFactory {
 		DataSource ds = null;
 		try {
 			ctx = new InitialContext();
-			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/task_board");
+			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/todo_app");
 		} catch (NamingException e) {
 			if (ctx != null) {
 				try {
