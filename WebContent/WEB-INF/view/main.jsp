@@ -149,7 +149,7 @@
 						</div>
 						<div class="card-body bodyPriority${task.priorityId}">
 							<div class="row" id="timeLimit">
-								<p class="" id="${count.index}">
+								<p class="timeAndLimit" id="${count.index}">
 									<b>期限：</b>
 									<fmt:formatDate value="${task.timeLimit}"
 										pattern="y年M月d日" />

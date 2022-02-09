@@ -32,7 +32,6 @@ public class EditTaskServlet extends HttpServlet {
 			Date timeLimit = editTask.getTimeLimit();
 
 			SimpleDateFormat sdf = new SimpleDateFormat("y-MM-dd'T'HH:mm");
-			Date now = new Date();
 			String timeLimitSdf = sdf.format(timeLimit);
 
 			request.setAttribute("timeLimit", timeLimitSdf);
@@ -52,7 +51,6 @@ public class EditTaskServlet extends HttpServlet {
 			//宣言部
 			TaskDao taskDao = DaoFactory.createTaskDao();
 			PriorityDao priorityDao = DaoFactory.createPriorityDao();
-			List<Task> taskList = taskDao.findAll();
 			List<Priority> priorityList = priorityDao.findAll();
 
 			request.setAttribute("priorityList", priorityList);
@@ -60,7 +58,6 @@ public class EditTaskServlet extends HttpServlet {
 			String title = request.getParameter("title");
 			String detail = request.getParameter("detail");
 
-			Integer taskTypeId = 1;
 			Integer priorityId = Integer.parseInt(request.getParameter("priorityId"));
 			String timeLimitStr = request.getParameter("timeLimit");
 

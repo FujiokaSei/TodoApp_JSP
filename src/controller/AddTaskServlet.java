@@ -26,10 +26,7 @@ public class AddTaskServlet extends HttpServlet {
 
 		try {
 			TaskDao taskDao = DaoFactory.createTaskDao();
-			//			TaskTypeDao taskTypeDao = DaoFactory.createTaskTypeDao();
 			PriorityDao priorityDao = DaoFactory.createPriorityDao();
-			List<Task> taskList = taskDao.findAll();
-			//			List<TaskType> taskTypeList = taskTypeDao.findAll();
 			List<Priority> priorityList = priorityDao.findAll();
 
 			request.setAttribute("priorityList", priorityList);
