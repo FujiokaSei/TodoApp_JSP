@@ -20,7 +20,7 @@
 
 			<div class="container-fluid">
 				<div class="row d-flex justify-content-between header">
-					<a class="navbar-brand" href="#">TodoApp</a> <a href="login"
+					<a class="navbar-brand" href="#">TodoApp JSP/Servlet ver</a> <a href="login"
 						class="btn btn-danger logoutButton">ログアウト</a>
 				</div>
 			</div>

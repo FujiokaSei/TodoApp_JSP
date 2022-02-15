@@ -16,7 +16,7 @@
 				<div class="row justify-content-between">
 					<table>
 						<tr>
-							<td><a class="navbar-brand" href="#">TodoApp</a></td>
+							<td><a class="navbar-brand" href="#">TodoApp JSP/Servlet ver</a></td>
 						</tr>
 					</table>
 				</div>
