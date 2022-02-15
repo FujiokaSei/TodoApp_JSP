@@ -23,7 +23,7 @@ public class TaskDaoImpl implements TaskDao {
 	public List<Task> findAll() throws Exception {
 		List<Task> taskList = new ArrayList<>();
 		try (Connection con = ds.getConnection()) {
-			String sql = "SELECT * FROM task_board.tasks;";
+			String sql = "SELECT * FROM todo_app.tasks;";
 			PreparedStatement stmt = con.prepareStatement(sql);
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
@@ -39,7 +39,7 @@ public class TaskDaoImpl implements TaskDao {
 	public Task findById(Integer id) throws Exception {
 		Task task = null;
 		try (Connection con = ds.getConnection()) {
-			String sql = "SELECT *  FROM task_board.tasks WHERE tasks.id=?";
+			String sql = "SELECT *  FROM todo_app.tasks WHERE tasks.id=?";
 			PreparedStatement stmt = con.prepareStatement(sql);
 			stmt.setInt(1, id);
 			ResultSet rs = stmt.executeQuery();
@@ -55,7 +55,7 @@ public class TaskDaoImpl implements TaskDao {
 	@Override
 	public void insert(Task task) throws Exception {
 		try (Connection con = ds.getConnection()) {
-			String sql = "INSERT INTO task_board.tasks"
+			String sql = "INSERT INTO todo_app.tasks"
 					+ "(title, detail, adding_time, time_limit, user_id, task_type_id, priority_id)VALUES"
 					+ " (?, ?, NOW(), ?, ?, ?, ?)";
 			PreparedStatement stmt = con.prepareStatement(sql);
@@ -106,7 +106,7 @@ public class TaskDaoImpl implements TaskDao {
 	public List<Task> findDoingDeadlineOrder() throws Exception {
 		List<Task> taskList = new ArrayList<>();
 		try (Connection con = ds.getConnection()) {
-			String sql = "SELECT * FROM task_board.tasks "
+			String sql = "SELECT * FROM todo_app.tasks "
 					+ "WHERE(task_type_id <> 3) "
 					+ "ORDER BY time_limit ASC, priority_id DESC;";
 			PreparedStatement stmt = con.prepareStatement(sql);
@@ -124,7 +124,7 @@ public class TaskDaoImpl implements TaskDao {
 	public List<Task> findDoingPriorityOrder() throws Exception {
 		List<Task> taskList = new ArrayList<>();
 		try (Connection con = ds.getConnection()) {
-			String sql = "SELECT * FROM task_board.tasks "
+			String sql = "SELECT * FROM todo_app.tasks "
 					+ "WHERE(task_type_id <> 3) "
 					+ "ORDER BY priority_id DESC, time_limit ASC;";
 			PreparedStatement stmt = con.prepareStatement(sql);
@@ -142,7 +142,7 @@ public class TaskDaoImpl implements TaskDao {
 	public void complete(Task task) throws Exception {
 		int id = task.getId();
 		try (Connection con = ds.getConnection()) {
-			String sql = "UPDATE `task_board`.`tasks` SET `task_type_id` = '3' WHERE (`id` = ?);";
+			String sql = "UPDATE `todo_app`.`tasks` SET `task_type_id` = '3' WHERE (`id` = ?);";
 			PreparedStatement stmt = con.prepareStatement(sql);
 			stmt.setInt(1, id);
 			stmt.executeUpdate();
@@ -156,7 +156,7 @@ public class TaskDaoImpl implements TaskDao {
 	public Integer findDoneCount() throws Exception {
 		Integer doneCount = null;
 		try (Connection con = ds.getConnection()) {
-			String sql = "SELECT COUNT(*) AS count FROM task_board.tasks WHERE task_type_id = 3;";
+			String sql = "SELECT COUNT(*) AS count FROM todo_app.tasks WHERE task_type_id = 3;";
 			PreparedStatement stmt = con.prepareStatement(sql);
 			ResultSet rs = stmt.executeQuery();
 
@@ -178,7 +178,7 @@ public class TaskDaoImpl implements TaskDao {
 	public Integer findAllCount() throws Exception {
 		Integer allCount = null;
 		try (Connection con = ds.getConnection()) {
-			String sql = "SELECT COUNT(*) AS count FROM task_board.tasks;";
+			String sql = "SELECT COUNT(*) AS count FROM todo_app.tasks;";
 			PreparedStatement stmt = con.prepareStatement(sql);
 			ResultSet rs = stmt.executeQuery();
 

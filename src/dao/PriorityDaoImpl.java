@@ -22,7 +22,7 @@ public class PriorityDaoImpl implements PriorityDao {
 	public List<Priority> findAll() throws Exception {
 		List<Priority> priorityList = new ArrayList<>();
 		try (Connection con = ds.getConnection()) {
-			String sql = "SELECT * FROM task_board.prioritys;";
+			String sql = "SELECT * FROM todo_app.prioritys;";
 			PreparedStatement stmt = con.prepareStatement(sql);
 			ResultSet rs = stmt.executeQuery();
 
